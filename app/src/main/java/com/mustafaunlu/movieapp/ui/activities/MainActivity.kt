@@ -12,31 +12,10 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        val splashScreen =installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val content :View =findViewById(android.R.id.content)
-        content.viewTreeObserver.addOnDrawListener {
-            // sleep is added for now
-            Thread.sleep(3000)
-            object  : ViewTreeObserver.OnPreDrawListener{
 
-                override fun onPreDraw(): Boolean {
-                    //ViewModel ready will add
-                    return if(true){
-                        content.viewTreeObserver.removeOnPreDrawListener(this)
-                        true
-                    }else{
-                        false
-
-                    }
-                }
-
-
-            }
-        }
 
 
 
