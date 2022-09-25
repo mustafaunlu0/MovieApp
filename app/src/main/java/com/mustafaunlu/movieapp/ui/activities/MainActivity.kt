@@ -1,5 +1,4 @@
 package com.mustafaunlu.movieapp.ui.activities
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
         val splashScreen =installSplashScreen()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.activity_main)
 
         val content :View =findViewById(android.R.id.content)
         content.viewTreeObserver.addOnDrawListener {
