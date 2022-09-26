@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentSignUpBinding
 import com.mustafaunlu.movieapp.ui.activities.MainActivity
@@ -32,8 +33,25 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.signUpButton?.setOnClickListener {
-            val intent=Intent(view.context,MainActivity::class.java);
-            startActivity(intent)
+
+            if(binding!!.usernameEditText.text.isNotEmpty() && binding!!.emailEditText.text.isNotEmpty() && binding!!.passwordEditText.text.isNotEmpty() && binding!!.passwordOneEditText.text.isNotEmpty()){
+
+                if(binding!!.passwordEditText.text.equals(binding!!.passwordOneEditText.text)){
+                    //Intent to MainActivity
+                    val intent=Intent(view.context,MainActivity::class.java);
+                    startActivity(intent)
+                    requireActivity().finish()
+
+                }else{
+
+                    Toast.makeText(context,"Passwords are not compatible!",Toast.LENGTH_LONG).show()
+                }
+            }else{
+                Toast.makeText(context,"Fill the blanks!",Toast.LENGTH_LONG).show()
+
+            }
+
+
         }
     }
 

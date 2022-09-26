@@ -99,7 +99,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/background_input"
         android:hint="Password"
-        android:imeOptions="actionNext"
+        android:imeOptions="actionDone"
         android:importantForAutofill="no"
         android:inputType="textPassword"
         android:paddingStart="15dp"
