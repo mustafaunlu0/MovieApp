@@ -3,6 +3,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.intro.IntroFragment">
+
+    <ImageView
+        android:id="@+id/promotionImageView"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="110dp"
+        android:src="@color/appColor"
+        />
+    <TextView
+        android:id="@+id/promotionTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="23sp"
+        android:text="Promotion Title"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/promotionImageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="25dp"
+        />
+    <TextView
+        android:id="@+id/promotionExpTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Promotion Exp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/promotionTitleTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/promotionNextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:textColor="@color/white"
+        android:background="@drawable/button_background"
+        app:layout_constraintTop_toBottomOf="@id/promotionExpTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="20dp"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/promotionPrevButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prev"
+        android:textColor="@color/white"
+        android:background="@drawable/button_background"
+        app:layout_constraintTop_toBottomOf="@id/promotionExpTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="150dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

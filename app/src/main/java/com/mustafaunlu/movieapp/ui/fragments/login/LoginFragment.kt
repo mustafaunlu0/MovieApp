@@ -29,13 +29,14 @@ class LoginFragment : Fragment() {
 
         mAuth=Firebase.auth;
 
+        /*
         val currentUser=mAuth.currentUser
         if(currentUser != null){
             val intent=Intent(context,MainActivity::class.java);
             startActivity(intent)
             requireActivity().finish();
         }
-
+        */
 
     }
 
@@ -74,6 +75,9 @@ class LoginFragment : Fragment() {
         }
         binding?.newTextView?.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+        }
+        binding?.forgotPasswordTextView?.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_introFragment)
         }
 
 

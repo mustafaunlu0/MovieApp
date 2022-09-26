@@ -44,9 +44,6 @@ class SignUpFragment : Fragment() {
 
             if(binding!!.usernameEditText.text.isNotEmpty() && binding!!.emailEditText.text.isNotEmpty() && binding!!.passwordEditText.text.isNotEmpty() && binding!!.passwordOneEditText.text.isNotEmpty()){
 
-                println("1: "+binding!!.passwordEditText.text)
-                println(": "+binding!!.passwordEditText.text)
-
                 if(binding!!.passwordEditText.text.toString().equals(binding!!.passwordOneEditText.text.toString())){
                     //Sign up Firebase and Intent to MainActivity
 
