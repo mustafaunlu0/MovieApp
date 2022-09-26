@@ -63,7 +63,7 @@
         android:layout_marginRight="50dp"
         />
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/loginPasswordEditText"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="40dp"
@@ -81,7 +81,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/forgotPasswordTextView"/>
     <EditText
-        android:id="@+id/usernameEditText"
+        android:id="@+id/loginEmailEditText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
@@ -97,7 +97,7 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/passwordEditText"/>
+        app:layout_constraintBottom_toTopOf="@id/loginPasswordEditText"/>
     <TextView
         android:id="@+id/welcomeTextView"
         android:layout_width="match_parent"
@@ -109,7 +109,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toTopOf="@id/usernameEditText"/>
+        app:layout_constraintBottom_toTopOf="@id/loginEmailEditText"/>
 
 
 

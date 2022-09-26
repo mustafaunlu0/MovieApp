@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentLoginBinding
 import com.mustafaunlu.movieapp.ui.activities.LoginActivity
@@ -19,8 +22,20 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private var binding : FragmentLoginBinding? = null
+
+    private lateinit var mAuth: FirebaseAuth;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mAuth=Firebase.auth;
+
+        val currentUser=mAuth.currentUser
+        if(currentUser != null){
+            val intent=Intent(context,MainActivity::class.java);
+            startActivity(intent)
+            requireActivity().finish();
+        }
+
 
     }
 
@@ -37,10 +52,21 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.signInButton?.setOnClickListener {
-            println("Username: "+binding?.usernameEditText?.text)
-            if(binding?.usernameEditText?.text?.isEmpty() == false && binding?.passwordEditText?.text?.isEmpty() == false){
-                val intent=Intent(view.context,MainActivity::class.java);
-                startActivity(intent)
+            if(binding?.loginEmailEditText?.text?.isEmpty() == false && binding?.loginPasswordEditText?.text?.isEmpty() == false){
+
+                mAuth.signInWithEmailAndPassword(binding?.loginEmailEditText?.text.toString(),binding?.loginPasswordEditText?.text.toString()).addOnCompleteListener {  task ->
+                    if(task.isSuccessful){
+                        val intent=Intent(view.context,MainActivity::class.java);
+                        startActivity(intent)
+                        requireActivity().finish();
+                    }
+
+                }.addOnFailureListener {
+                    Toast.makeText(context,it.toString(), Toast.LENGTH_LONG).show()
+
+                }
+
+
             }else{
                 Toast.makeText(context,"Fill the blanks!", Toast.LENGTH_LONG).show()
             }
@@ -48,8 +74,6 @@ class LoginFragment : Fragment() {
         }
         binding?.newTextView?.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
-
-
         }
 
 
