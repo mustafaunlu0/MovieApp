@@ -9,7 +9,9 @@ import android.widget.Toast
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentIntroBinding
 import com.mustafaunlu.movieapp.models.promotion.Promotion
+import com.mustafaunlu.movieapp.pref.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class IntroFragment : Fragment() {
@@ -21,6 +23,10 @@ class IntroFragment : Fragment() {
     private lateinit var promotionMovies : Promotion
     private lateinit var promotionNotification : Promotion
     private var proNumber : Int = 0
+    //Across
+    @Inject
+    lateinit var sessionManager: SessionManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +45,12 @@ class IntroFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if(sessionManager.getIsFirstRun()){
+            Toast.makeText(context, "ilk giriş",Toast.LENGTH_SHORT).show()
+            sessionManager.setIsFirstRun(false)
+        }else{
+            Toast.makeText(context, "artık girmeyecek",Toast.LENGTH_SHORT).show()
+        }
         createPromotions()
         placePromotion()
 

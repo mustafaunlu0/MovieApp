@@ -14,6 +14,8 @@ class LoginActivity : AppCompatActivity() {
         val splashScreen =installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+
         val content : View =findViewById(android.R.id.content)
         content.viewTreeObserver.addOnDrawListener {
             object  : ViewTreeObserver.OnPreDrawListener{

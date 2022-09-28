@@ -14,9 +14,11 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentLoginBinding
+import com.mustafaunlu.movieapp.pref.SessionManager
 import com.mustafaunlu.movieapp.ui.activities.LoginActivity
 import com.mustafaunlu.movieapp.ui.activities.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -24,6 +26,8 @@ class LoginFragment : Fragment() {
     private var binding : FragmentLoginBinding? = null
 
     private lateinit var mAuth: FirebaseAuth;
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
