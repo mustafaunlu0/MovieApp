@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -17,6 +18,7 @@ import com.mustafaunlu.movieapp.databinding.FragmentLoginBinding
 import com.mustafaunlu.movieapp.pref.SessionManager
 import com.mustafaunlu.movieapp.ui.activities.LoginActivity
 import com.mustafaunlu.movieapp.ui.activities.MainActivity
+import com.mustafaunlu.movieapp.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -24,23 +26,17 @@ import javax.inject.Inject
 class LoginFragment : Fragment() {
 
     private var binding : FragmentLoginBinding? = null
-
-    private lateinit var mAuth: FirebaseAuth;
+    private val viewModel: LoginViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mAuth=Firebase.auth;
-
-        /*
-        val currentUser=mAuth.currentUser
-        if(currentUser != null){
+        if(viewModel.isCurrentUser(requireContext())){
             val intent=Intent(context,MainActivity::class.java);
             startActivity(intent)
             requireActivity().finish();
         }
-        */
 
     }
 
@@ -57,24 +53,9 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.signInButton?.setOnClickListener {
-            if(binding?.loginEmailEditText?.text?.isEmpty() == false && binding?.loginPasswordEditText?.text?.isEmpty() == false){
-
-                mAuth.signInWithEmailAndPassword(binding?.loginEmailEditText?.text.toString(),binding?.loginPasswordEditText?.text.toString()).addOnCompleteListener {  task ->
-                    if(task.isSuccessful){
-                        val intent=Intent(view.context,MainActivity::class.java);
-                        startActivity(intent)
-                        requireActivity().finish();
-                    }
-
-                }.addOnFailureListener {
-                    Toast.makeText(context,it.toString(), Toast.LENGTH_LONG).show()
-
-                }
-
-
-            }else{
-                Toast.makeText(context,"Fill the blanks!", Toast.LENGTH_LONG).show()
-            }
+            val email=binding?.loginEmailEditText?.text?.toString()
+            val password=binding?.loginPasswordEditText?.text?.toString()
+            viewModel.signIn(email!!,password!!,requireContext())
 
         }
         binding?.newTextView?.setOnClickListener {
