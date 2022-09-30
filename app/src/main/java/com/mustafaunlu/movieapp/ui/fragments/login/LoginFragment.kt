@@ -10,8 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentLoginBinding
-import com.mustafaunlu.movieapp.ui.activities.MainActivity
 import com.mustafaunlu.movieapp.viewmodel.LoginViewModel
+import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -47,13 +47,15 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.signInButton?.setOnClickListener {
-            val email=binding?.loginEmailEditText?.text?.toString()
-            val password=binding?.loginPasswordEditText?.text?.toString()
-            if (email != null && password != null) {
+            val email=binding!!.loginEmailEditText.text.toString()
+            val password=binding!!.loginPasswordEditText.text.toString()
+            if (email.isNotEmpty() && password.isNotEmpty()) {
                 viewModel.signIn(email, password, requireContext()
                 )
             }else{
-                Toast.makeText(context,"Fill the blanks!", Toast.LENGTH_LONG).show()
+                FancyToast.makeText(requireContext(),"Fill the blanks !",FancyToast.LENGTH_LONG,FancyToast.CONFUSING,false).show();
+
+
             }
 
         }

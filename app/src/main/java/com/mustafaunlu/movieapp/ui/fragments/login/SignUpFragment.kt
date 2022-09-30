@@ -19,6 +19,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.mustafaunlu.movieapp.databinding.FragmentSignUpBinding
 import com.mustafaunlu.movieapp.viewmodel.LoginViewModel
+import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -66,7 +67,9 @@ class SignUpFragment  : Fragment() {
                 && selectedPicture != null){
                 viewModel.signUp(email,username,password,passwordAgain, selectedPicture!!,context!!)
             }else{
-                Toast.makeText(context,"Fill the blanks!",Toast.LENGTH_LONG).show()
+                FancyToast.makeText(requireContext(),"Fill the blanks !",
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.CONFUSING,false).show();
             }
         }
     }
@@ -104,7 +107,8 @@ class SignUpFragment  : Fragment() {
                 }
 
             }else{
-                Toast.makeText(context,"Permission need",Toast.LENGTH_LONG).show()
+                FancyToast.makeText(requireContext(),"Image not selected",FancyToast.LENGTH_LONG,FancyToast.INFO,false).show();
+
             }
         }
 
@@ -114,7 +118,7 @@ class SignUpFragment  : Fragment() {
                 val intent=Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                 activityResultLauncher.launch(intent)
             }else{
-                Toast.makeText(context,"Permission needed",Toast.LENGTH_LONG).show()
+                FancyToast.makeText(requireContext(),"Permission need2",FancyToast.LENGTH_LONG,FancyToast.INFO,false).show();
             }
         }
     }

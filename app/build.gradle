@@ -55,7 +55,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
-
+    //for Custom Toast
+    implementation 'io.github.shashank02051997:FancyToast:2.0.2'
 
     //for Splash
     implementation 'androidx.core:core-splashscreen:1.0.0'
