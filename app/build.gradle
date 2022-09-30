@@ -56,7 +56,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
 
-    //for splash
+
+    //for Splash
     implementation 'androidx.core:core-splashscreen:1.0.0'
 
     //Hilt

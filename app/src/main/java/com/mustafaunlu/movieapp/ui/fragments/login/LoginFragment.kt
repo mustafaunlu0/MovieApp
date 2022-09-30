@@ -1,6 +1,4 @@
 package com.mustafaunlu.movieapp.ui.fragments.login
-
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,17 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentLoginBinding
-import com.mustafaunlu.movieapp.pref.SessionManager
-import com.mustafaunlu.movieapp.ui.activities.LoginActivity
 import com.mustafaunlu.movieapp.ui.activities.MainActivity
 import com.mustafaunlu.movieapp.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -31,12 +23,14 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        /*
         if(viewModel.isCurrentUser(requireContext())){
             val intent=Intent(context,MainActivity::class.java);
             startActivity(intent)
             requireActivity().finish();
         }
+
+         */
 
     }
 
@@ -55,7 +49,12 @@ class LoginFragment : Fragment() {
         binding?.signInButton?.setOnClickListener {
             val email=binding?.loginEmailEditText?.text?.toString()
             val password=binding?.loginPasswordEditText?.text?.toString()
-            viewModel.signIn(email!!,password!!,requireContext())
+            if (email != null && password != null) {
+                viewModel.signIn(email, password, requireContext()
+                )
+            }else{
+                Toast.makeText(context,"Fill the blanks!", Toast.LENGTH_LONG).show()
+            }
 
         }
         binding?.newTextView?.setOnClickListener {

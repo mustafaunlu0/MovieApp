@@ -15,43 +15,29 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 import com.mustafaunlu.movieapp.databinding.FragmentSignUpBinding
-import com.mustafaunlu.movieapp.ui.activities.MainActivity
+import com.mustafaunlu.movieapp.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.sql.Timestamp
-import java.util.*
-import java.util.jar.Manifest
+
 
 @AndroidEntryPoint
-class SignUpFragment : Fragment() {
+class SignUpFragment  : Fragment() {
 
     private var binding: FragmentSignUpBinding? = null
-
-    private lateinit var auth : FirebaseAuth;
-    private lateinit var storage : FirebaseStorage
-    private lateinit var firestore : FirebaseFirestore
 
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
 
     private var selectedPicture : Uri? = null
 
+    private val viewModel : LoginViewModel by viewModels()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         registerLauncher()
-        auth= Firebase.auth
-        storage = Firebase.storage
-        firestore=Firebase.firestore
-
-
     }
 
 
@@ -69,11 +55,16 @@ class SignUpFragment : Fragment() {
        binding!!.profileImageView.setOnClickListener{
            selectImage()
        }
-
         binding!!.signUpButton.setOnClickListener {
-            if(binding!!.usernameEditText.text.isNotEmpty() && binding!!.emailEditText.text.isNotEmpty() && binding!!.passwordEditText.text.isNotEmpty() && binding!!.passwordOneEditText.text.isNotEmpty()){
-                createUser()
 
+            val email=binding!!.emailEditText.text.toString()
+            val username=binding!!.usernameEditText.text.toString()
+            val password=binding!!.passwordEditText.text.toString()
+            val passwordAgain=binding!!.passwordOneEditText.text.toString()
+
+            if(username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && passwordAgain.isNotEmpty()
+                && selectedPicture != null){
+                viewModel.signUp(email,username,password,passwordAgain, selectedPicture!!,context!!)
             }else{
                 Toast.makeText(context,"Fill the blanks!",Toast.LENGTH_LONG).show()
             }
@@ -129,86 +120,9 @@ class SignUpFragment : Fragment() {
     }
 
 
-    private fun createUser(){
-        if(binding!!.passwordEditText.text.toString().equals(binding!!.passwordOneEditText.text.toString())){
-            //Sign up Firebase and Intent to MainActivity
-
-            auth.createUserWithEmailAndPassword(binding!!.emailEditText.text.toString(),binding!!.passwordEditText.text.toString()).addOnCompleteListener {  task ->
-                if(task.isSuccessful){
-                    Toast.makeText(context,"Success",Toast.LENGTH_LONG).show()
-                    createUserWithInfo()
-
-                }else{
-                    Toast.makeText(context,"Failure",Toast.LENGTH_LONG).show()
-
-                }
-
-            }.addOnFailureListener {
-                Toast.makeText(context,it.toString(),Toast.LENGTH_LONG).show()
-
-            }
 
 
 
-        }else{
-            Toast.makeText(context,"Passwords are not compatible!",Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun createUserWithInfo() {
-        println("fonksiyon başı")
-        val uuid = UUID.randomUUID()
-        val imageName="$uuid.jpg"
-        println("imageName: "+imageName)
-
-        val reference= storage.reference
-        val imageReference=reference.child("images").child(imageName)
-
-        //önce storage e koy sonra uriyi al firestore a at
-        if(selectedPicture != null){
-            println("selectedPicture: "+selectedPicture)
-
-            imageReference.putFile(selectedPicture!!).addOnSuccessListener {
-
-                val uploadPictureReference=storage.reference.child("images").child(imageName)
-
-                uploadPictureReference.downloadUrl.addOnSuccessListener {
-                    val downloadUri=it.toString()
-                    if(auth.currentUser != null){
-                        println("DownloadUri: "+downloadUri)
-
-                        val postMap= hashMapOf<String,Any>()
-                        postMap["downloadUri"] = downloadUri
-                        postMap["email"]=auth.currentUser!!.email!!
-                        postMap["username"]=binding!!.usernameEditText.text.toString()
-                        postMap["password"]=binding!!.passwordEditText.text.toString()
-                        postMap["date"]=com.google.firebase.Timestamp.now()
-                        println("collectionUstu")
-                        firestore.collection("User").add(postMap).addOnSuccessListener {
-                            println("collectionAltı")
-                            Toast.makeText(context,"Successful Login!",Toast.LENGTH_LONG).show()
-                            val intent=Intent(context,MainActivity::class.java);
-                            startActivity(intent)
-                            requireActivity().finish()
-                        }.addOnFailureListener { exception->
-                            Toast.makeText(context,exception.localizedMessage,Toast.LENGTH_LONG).show()
-                        }
-
-                    }
-
-
-
-                }.addOnFailureListener { exception->
-                    Toast.makeText(context,exception.localizedMessage,Toast.LENGTH_LONG).show()
-                }
-            }.addOnFailureListener{ exception ->
-                Toast.makeText(context,exception.localizedMessage,Toast.LENGTH_LONG).show()
-
-            }
-        }
-
-
-    }
 
 
 }
