@@ -6,27 +6,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activities.MainActivity"
-    android:background="@color/appColor"
+    android:background="@color/white"
     android:orientation="vertical"
+
     >
 
-
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/homeContainer"
+        android:id="@+id/mainFragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
+        android:layout_marginBottom="60dp"
         app:navGraph="@navigation/home_nav"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
+        />
+
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
-        android:id="@+id/bottomNavBar"
+        android:id="@+id/bottom_nav_bar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="bottom"
-        android:background="@color/white"
         android:elevation="5dp"
-        />
-
+        android:background="@color/appColor"
+        app:cnb_menuResource="@menu/menu"
+        tools:ignore="MissingClass"/>
 </FrameLayout>

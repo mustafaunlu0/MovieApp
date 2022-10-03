@@ -5,7 +5,11 @@
       <map>
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/background_input.xml" value="0.1045" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/button_background.xml" value="0.15" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_account.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_android_black.xml" value="0.1" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_favorite.xml" value="0.1" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_feedd.xml" value="0.17" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_popcorn.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/splash_inset.xml" value="0.2" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/activity_login.xml" value="0.32222222222222224" />
@@ -17,6 +21,7 @@
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_login.xml" value="0.22" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_profile.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/menu/menu.xml" value="0.21851851851851853" />
       </map>
     </option>
   </component>
