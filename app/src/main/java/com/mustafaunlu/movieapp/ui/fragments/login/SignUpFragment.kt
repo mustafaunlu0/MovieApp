@@ -16,11 +16,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentSignUpBinding
+import com.mustafaunlu.movieapp.pref.SessionManager
 import com.mustafaunlu.movieapp.viewmodel.LoginViewModel
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -34,6 +38,9 @@ class SignUpFragment  : Fragment() {
     private var selectedPicture : Uri? = null
 
     private val viewModel : LoginViewModel by viewModels()
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +73,13 @@ class SignUpFragment  : Fragment() {
             if(username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && passwordAgain.isNotEmpty()
                 && selectedPicture != null){
                 viewModel.signUp(email,username,password,passwordAgain, selectedPicture!!,context!!)
+                if (sessionManager.getIsFirstRun()){
+                    sessionManager.setIsFirstRun(false)
+                    findNavController().navigate(R.id.action_signUpFragment_to_introFragment)
+                }else{
+                    findNavController().navigate(R.id.action_signUpFragment_to_mainActivity)
+
+                }
             }else{
                 FancyToast.makeText(requireContext(),"Fill the blanks !",
                     FancyToast.LENGTH_LONG,

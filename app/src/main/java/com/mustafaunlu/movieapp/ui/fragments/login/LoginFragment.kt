@@ -10,12 +10,18 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentLoginBinding
+import com.mustafaunlu.movieapp.pref.SessionManager
+import com.mustafaunlu.movieapp.ui.activities.MainActivity
 import com.mustafaunlu.movieapp.viewmodel.LoginViewModel
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     private var binding : FragmentLoginBinding? = null
     private val viewModel: LoginViewModel by viewModels()
@@ -23,14 +29,16 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*
+
         if(viewModel.isCurrentUser(requireContext())){
-            val intent=Intent(context,MainActivity::class.java);
+            val intent=Intent(context, MainActivity::class.java);
             startActivity(intent)
             requireActivity().finish();
         }
 
-         */
+
+
+
 
     }
 
@@ -50,8 +58,13 @@ class LoginFragment : Fragment() {
             val email=binding!!.loginEmailEditText.text.toString()
             val password=binding!!.loginPasswordEditText.text.toString()
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                viewModel.signIn(email, password, requireContext()
-                )
+                viewModel.signIn(email, password, requireContext())
+                if(sessionManager.getIsFirstRun()){
+                    sessionManager.setIsFirstRun(false)
+                    findNavController().navigate(R.id.action_loginFragment_to_introFragment)
+                }else{
+                    findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
+                }
             }else{
                 FancyToast.makeText(requireContext(),"Fill the blanks !",FancyToast.LENGTH_LONG,FancyToast.CONFUSING,false).show();
 

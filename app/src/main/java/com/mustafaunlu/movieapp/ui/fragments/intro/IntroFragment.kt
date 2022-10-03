@@ -1,15 +1,18 @@
 package com.mustafaunlu.movieapp.ui.fragments.intro
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentIntroBinding
 import com.mustafaunlu.movieapp.models.promotion.Promotion
 import com.mustafaunlu.movieapp.pref.SessionManager
+import com.mustafaunlu.movieapp.ui.activities.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -32,6 +35,9 @@ class IntroFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
 
+
+
+
     }
 
     override fun onCreateView(
@@ -45,14 +51,14 @@ class IntroFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(sessionManager.getIsFirstRun()){
-            Toast.makeText(context, "ilk giriş",Toast.LENGTH_SHORT).show()
             sessionManager.setIsFirstRun(false)
-        }else{
-            Toast.makeText(context, "artık girmeyecek",Toast.LENGTH_SHORT).show()
-        }
-        createPromotions()
-        placePromotion()
+            Toast.makeText(context, "ilk giriş",Toast.LENGTH_SHORT).show()
+            createPromotions()
+            placePromotion()
+
+
+
+
 
     }
 
@@ -80,6 +86,7 @@ class IntroFragment : Fragment() {
                 else->{
                     //to Intent
                     Toast.makeText(context, "LOADING..",Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_introFragment_to_mainActivity)
                     proNumber--
                 }
 

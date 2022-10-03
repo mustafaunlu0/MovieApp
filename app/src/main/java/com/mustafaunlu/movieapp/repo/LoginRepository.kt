@@ -32,8 +32,8 @@ class LoginRepository @Inject constructor(
                     FancyToast.makeText(context,"Login..",
                         FancyToast.LENGTH_LONG,
                         FancyToast.SUCCESS,false).show();
-                    val intent=Intent(context,MainActivity::class.java);
-                    context.startActivity(intent)
+                    //val intent=Intent(context,MainActivity::class.java);
+                    //context.startActivity(intent)
 
                     // you dont finish activity -> requireActivity().finish();
                 }
@@ -77,8 +77,8 @@ class LoginRepository @Inject constructor(
                             FancyToast.LENGTH_LONG,
                             FancyToast.SUCCESS,false).show();
 
-                        val intent=Intent(context,MainActivity::class.java);
-                        context.startActivity(intent)
+                        //val intent=Intent(context,MainActivity::class.java);
+                        //context.startActivity(intent)
                         // you dont finish activity -> requireActivity().finish();
 
 
