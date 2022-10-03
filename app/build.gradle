@@ -55,6 +55,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
+    //Bottom Navigation Bar
+    implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
+
+
     //for Custom Toast
     implementation 'io.github.shashank02051997:FancyToast:2.0.2'
 
