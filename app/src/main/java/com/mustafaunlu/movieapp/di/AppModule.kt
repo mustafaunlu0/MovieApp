@@ -10,12 +10,16 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.mustafaunlu.movieapp.pref.SessionManager
+import com.mustafaunlu.movieapp.repo.retrofit.RetrofitServiceInstance
 import com.mustafaunlu.movieapp.util.Constants
+import com.mustafaunlu.movieapp.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 
@@ -52,6 +56,26 @@ object AppModule {
     fun provideAuthInstance() : FirebaseAuth{
         return Firebase.auth
     }
+
+    //RETROFIT
+
+    @Provides
+    @Singleton
+    fun getRetrofitServiceInstance(retrofit: Retrofit) :RetrofitServiceInstance{
+        return retrofit.create(RetrofitServiceInstance::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun getRetrofitInstance() : Retrofit{
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+
+
 
 
 

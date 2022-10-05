@@ -3,10 +3,9 @@ package com.mustafaunlu.movieapp.viewmodel
 import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
-import com.mustafaunlu.movieapp.repo.LoginRepository
+import com.mustafaunlu.movieapp.repo.app.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val loginRepository: LoginRepository) :ViewModel() {

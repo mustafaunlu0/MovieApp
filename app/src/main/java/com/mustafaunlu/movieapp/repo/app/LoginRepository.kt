@@ -1,4 +1,4 @@
-package com.mustafaunlu.movieapp.repo
+package com.mustafaunlu.movieapp.repo.app
 
 import android.content.Context
 import android.content.Intent
