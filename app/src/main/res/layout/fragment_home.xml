@@ -1,14 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.home.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageCategory"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_category"
+        android:tint="@color/appColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
     <TextView
+        android:id="@+id/textCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Science Fiction"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/imageCategory"
+        app:layout_constraintStart_toEndOf="@id/imageCategory"
+        app:layout_constraintTop_toTopOf="@id/imageCategory"
+        />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/arrowDownImageView"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_arrow_down"
+        android:tint="@color/appColor"
+        app:layout_constraintBottom_toBottomOf="@id/textCategory"
+        app:layout_constraintStart_toEndOf="@id/textCategory"
+        app:layout_constraintTop_toTopOf="@id/textCategory"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/notificationImageView"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/ic_notifications"
+        android:tint="@color/appColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        />
+    <LinearLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/imageCategory"
+        android:paddingBottom="10dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/background_search"
+        >
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/ic_search"
+        android:tint="@color/appColor"/>
+    <EditText
+        android:id="@+id/searchEditText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home Fragment" />
+        android:layout_marginStart="10dp"
+        android:background="@null"
+        android:hint="Search"
+        android:textSize="16sp"
+        android:inputType="text"
+        android:importantForAutofill="no"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        />
+    </LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/recommendedCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/recommendedImageView"
+                android:layout_width="104dp"
+                android:layout_height="104dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/avenger"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_corner_radius="10dp"
+                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/recommendedImageView"
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Dr. Strange in the Multiverse of Madness"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Science Fiction"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="December 14, 2022"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"/>
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_marginTop="5dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:rating="4.1"/>
 
-</FrameLayout>
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/favoriteImageView"
+                android:layout_width="32dp"
+                android:layout_height="26dp"
+                android:background="#FFFF7173"
+                android:padding="2dp"
+                android:src="@drawable/ic_favorite"
+                android:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/recommendedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="26dp"
+        android:text="Recommended"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/recommendedCardView"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/viewAllTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="View All"
+        android:textColor="#6A6464"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/recommendedTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/recommendedTextView" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/moviesViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:paddingStart="65dp"
+        android:paddingEnd="65dp"
+        app:layout_constraintBottom_toTopOf="@+id/recommendedTextView"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
