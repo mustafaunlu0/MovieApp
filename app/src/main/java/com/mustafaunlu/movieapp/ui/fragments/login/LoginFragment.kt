@@ -5,12 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentLoginBinding
-import com.mustafaunlu.movieapp.pref.SessionManager
+import com.mustafaunlu.movieapp.db.pref.SessionManager
 import com.mustafaunlu.movieapp.ui.activities.MainActivity
 import com.mustafaunlu.movieapp.viewmodel.LoginViewModel
 import com.shashank.sony.fancytoastlib.FancyToast

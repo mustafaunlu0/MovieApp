@@ -9,7 +9,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
-import com.mustafaunlu.movieapp.pref.SessionManager
+import com.mustafaunlu.movieapp.db.pref.SessionManager
 import com.mustafaunlu.movieapp.repo.retrofit.RetrofitServiceInstance
 import com.mustafaunlu.movieapp.util.Constants
 import com.mustafaunlu.movieapp.util.Constants.BASE_URL

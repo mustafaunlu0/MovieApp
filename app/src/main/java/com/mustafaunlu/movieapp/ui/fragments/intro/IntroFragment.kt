@@ -1,6 +1,5 @@
 package com.mustafaunlu.movieapp.ui.fragments.intro
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,8 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentIntroBinding
 import com.mustafaunlu.movieapp.models.promotion.Promotion
-import com.mustafaunlu.movieapp.pref.SessionManager
-import com.mustafaunlu.movieapp.ui.activities.MainActivity
+import com.mustafaunlu.movieapp.db.pref.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

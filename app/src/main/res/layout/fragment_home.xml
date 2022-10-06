@@ -53,42 +53,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         />
-    <LinearLayout
-        android:id="@+id/searchLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/imageCategory"
-        android:paddingBottom="10dp"
-        android:paddingEnd="20dp"
-        android:paddingTop="10dp"
-        android:paddingStart="20dp"
-        android:orientation="horizontal"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/background_search"
-        >
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:src="@drawable/ic_search"
-        android:tint="@color/appColor"/>
-    <EditText
-        android:id="@+id/searchEditText"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:background="@null"
-        android:hint="Search"
-        android:textSize="16sp"
-        android:inputType="text"
-        android:importantForAutofill="no"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        />
-    </LinearLayout>
     <androidx.cardview.widget.CardView
         android:id="@+id/recommendedCardView"
         android:layout_width="match_parent"
@@ -210,8 +175,9 @@
         android:layout_marginBottom="15dp"
         android:paddingStart="65dp"
         android:paddingEnd="65dp"
+        android:paddingBottom="5dp"
         app:layout_constraintBottom_toTopOf="@+id/recommendedTextView"
-        app:layout_constraintTop_toBottomOf="@id/searchLayout"
+        app:layout_constraintTop_toBottomOf="@id/textCategory"
 
         />
 

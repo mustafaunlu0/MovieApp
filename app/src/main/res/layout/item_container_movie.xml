@@ -2,94 +2,79 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="10dp"
     android:clickable="true"
     android:focusable="true"
     app:cardCornerRadius="10dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    android:background="@color/black"
+    android:layout_marginEnd="50dp"
 
 
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="10dp"
+
+
+        >
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/posterImageView"
-            android:layout_width="140dp"
-            android:layout_height="281dp"
+            android:layout_width="0dp"
+            android:layout_height="241dp"
             android:layout_marginTop="4dp"
             android:scaleType="centerCrop"
             android:src="@drawable/popeye"
-            app:layout_constraintDimensionRatio="H, 3:1.6"
+            app:layout_constraintDimensionRatio="H, 2.5:1.6"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:riv_corner_radius="10dp" />
 
         <TextView
-            android:id="@+id/nameTextView"
+            android:id="@+id/posterNameTextView"
             android:layout_width="164dp"
-            android:layout_height="41dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="12dp"
             android:text="Popeye"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/posterImageView"
-            app:layout_constraintTop_toTopOf="@+id/posterImageView" />
+            app:layout_constraintStart_toStartOf="@id/posterImageView"
+            app:layout_constraintTop_toBottomOf="@id/posterImageView" />
 
         <TextView
-            android:id="@+id/textCategory"
+            android:id="@+id/posterGenreTextView"
             android:layout_width="138dp"
-            android:layout_height="42dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:text="Science Fiction"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/posterImageView"
-            app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
+            app:layout_constraintStart_toStartOf="@id/posterImageView"
+            app:layout_constraintTop_toBottomOf="@+id/posterNameTextView" />
 
         <TextView
-            android:id="@+id/releaseDateTextView"
+            android:id="@+id/posterDateTextView"
             android:layout_width="155dp"
-            android:layout_height="29dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:text="June 14 2022"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/posterImageView"
-            app:layout_constraintTop_toBottomOf="@+id/textCategory" />
+            app:layout_constraintStart_toStartOf="@id/posterImageView"
+            app:layout_constraintTop_toBottomOf="@+id/posterGenreTextView" />
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:isIndicator="true"
-            android:numStars="5"
-            android:rating="4.5"
-            app:layout_constraintStart_toEndOf="@+id/posterImageView"
-            app:layout_constraintTop_toBottomOf="@id/releaseDateTextView" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:background="#FFFF7173"
-            android:padding="4dp"
-            android:src="@drawable/ic_favorite"
-            android:tint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
 
 

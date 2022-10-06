@@ -1,4 +1,4 @@
-package com.mustafaunlu.movieapp.pref
+package com.mustafaunlu.movieapp.db.pref
 
 import android.content.SharedPreferences
 import com.mustafaunlu.movieapp.util.Constants

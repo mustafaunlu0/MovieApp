@@ -1,13 +1,9 @@
 package com.mustafaunlu.movieapp.ui.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.ViewTreeObserver
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.findNavController
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.ActivityMainBinding
-import com.mustafaunlu.movieapp.pref.SessionManager
+import com.mustafaunlu.movieapp.db.pref.SessionManager
 import com.mustafaunlu.movieapp.ui.fragments.home.FeedFragment
 import com.mustafaunlu.movieapp.ui.fragments.home.HomeFragment
 import com.mustafaunlu.movieapp.ui.fragments.home.ProfileFragment
