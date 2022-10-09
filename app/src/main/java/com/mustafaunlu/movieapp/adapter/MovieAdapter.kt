@@ -8,15 +8,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mustafaunlu.movieapp.R
+import com.mustafaunlu.movieapp.db.room.GenreData
 import com.mustafaunlu.movieapp.models.api.Result
 
 class MovieAdapter (private val isFirstScreen : Boolean =true)  :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     var resultList : List<Result>?= null
+    var genreList : List<GenreData>? = null
 
-    fun setList(resultList : List<Result>){
+    fun setList(resultList : List<Result>, genreList: List<GenreData>){
         this.resultList=resultList
+        this.genreList=genreList
         notifyDataSetChanged()
     }
 
@@ -25,10 +28,24 @@ class MovieAdapter (private val isFirstScreen : Boolean =true)  :
         private val title= view.findViewById<TextView>(R.id.posterNameTextView)
         private val posterImage=view.findViewById<ImageView>(R.id.posterImageView)
         private val date=view.findViewById<TextView>(R.id.posterDateTextView)
-        fun bind(data : Result){
+        private val genre=view.findViewById<TextView>(R.id.posterGenreTextView)
+        fun bind(data : Result,genreList: List<GenreData>){
+            var genres =""
             title.text=data.title
             date.text=data.release_date
-            println("Date: "+data.release_date)
+
+            for(id in data.genre_ids){
+                var result=genreList.find { x -> x.genre_id==id }
+
+                if(result != null){
+
+                    genres +=result.genre_name_en +", "
+                }
+            }
+            genres=genres.substring(0,genres.length-2)
+            genre.text=genres
+
+
             Glide.with(posterImage).load("https://image.tmdb.org/t/p/w342/"+data.poster_path).into(posterImage)
 
 
@@ -42,14 +59,15 @@ class MovieAdapter (private val isFirstScreen : Boolean =true)  :
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(resultList!![position])
+        //hata burada!!! genreLst koyunca patlıyor
+        holder.bind(resultList!![position],genreList!!)
     }
 
     override fun getItemCount(): Int {
         return if(resultList == null)
             0
         else if(isFirstScreen)
-            4
+            resultList!!.size
         else
             resultList!!.size
     }

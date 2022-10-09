@@ -72,13 +72,10 @@ class SignUpFragment  : Fragment() {
             if(username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && passwordAgain.isNotEmpty()
                 && selectedPicture != null){
                 viewModel.signUp(email,username,password,passwordAgain, selectedPicture!!,context!!)
-                if (sessionManager.getIsFirstRun()){
-                    sessionManager.setIsFirstRun(false)
-                    findNavController().navigate(R.id.action_signUpFragment_to_introFragment)
-                }else{
+
                     findNavController().navigate(R.id.action_signUpFragment_to_mainActivity)
 
-                }
+
             }else{
                 FancyToast.makeText(requireContext(),"Fill the blanks !",
                     FancyToast.LENGTH_LONG,

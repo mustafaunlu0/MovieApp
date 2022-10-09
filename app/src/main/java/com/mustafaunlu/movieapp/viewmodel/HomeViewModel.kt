@@ -20,8 +20,13 @@ class HomeViewModel @Inject constructor(private val repository: RetrofitReposito
     fun getObserverRecentMovie() : MutableLiveData<Movie>{
         return recentMovieList
     }
+
     fun getObserverPopularMovie() : MutableLiveData<Movie>{
         return popularMovieList
+    }
+
+    fun getObserverGenre() : MutableLiveData<Genre> {
+        return genreList
     }
 
     fun loadRecentMovieData(page : String){
@@ -29,6 +34,9 @@ class HomeViewModel @Inject constructor(private val repository: RetrofitReposito
     }
     fun loadPopularMovieData(page : String){
         repository.getPopularMovies(page,popularMovieList)
+    }
+    fun loadGenreData(){
+        repository.getGenres(genreList)
     }
 
 }

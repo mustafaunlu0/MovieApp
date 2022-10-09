@@ -33,12 +33,10 @@ class RetrofitRepository @Inject constructor(
         retrofitServiceInstance.getRecentMovies(page).enqueue(object : Callback<Movie>{
             override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
                 liveData.postValue(response.body())
-                println("olumlu")
             }
 
             override fun onFailure(call: Call<Movie>, t: Throwable) {
                 liveData.postValue(null)
-                println("hata")
             }
 
         })
@@ -48,10 +46,12 @@ class RetrofitRepository @Inject constructor(
         retrofitServiceInstance.getGenres().enqueue(object  : Callback<Genre>{
             override fun onResponse(call: Call<Genre>, response: Response<Genre>) {
                 liveData.postValue(response.body())
+
             }
 
             override fun onFailure(call: Call<Genre>, t: Throwable) {
                 liveData.postValue(null)
+
             }
 
         })

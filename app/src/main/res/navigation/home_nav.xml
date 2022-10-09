@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/introFragment2">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -39,6 +39,15 @@
             app:destination="@id/profileFragment" />
         <action
             android:id="@+id/action_feedFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/introFragment2"
+        android:name="com.mustafaunlu.movieapp.ui.fragments.intro.IntroFragment"
+        android:label="fragment_intro"
+        tools:layout="@layout/fragment_intro" >
+        <action
+            android:id="@+id/action_introFragment2_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

@@ -11,7 +11,7 @@ interface GenreDao {
     fun addGenre(genre : GenreData)
 
     @Insert
-    fun addAllGenres(genre: GenreData)
+    fun addAllGenres(genre: List<GenreData>)
 
     @Query("SELECT * FROM genres")
     fun readAllData() : List<GenreData>

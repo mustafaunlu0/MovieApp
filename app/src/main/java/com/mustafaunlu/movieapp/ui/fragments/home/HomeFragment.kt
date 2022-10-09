@@ -14,7 +14,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.adapter.MovieAdapter
 import com.mustafaunlu.movieapp.databinding.FragmentHomeBinding
+import com.mustafaunlu.movieapp.db.room.GenreData
 import com.mustafaunlu.movieapp.models.api.Movie
+import com.mustafaunlu.movieapp.viewmodel.GenreViewModel
 import com.mustafaunlu.movieapp.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -24,9 +26,13 @@ import kotlin.math.abs
 class HomeFragment : Fragment() {
 
     private val viewModel : HomeViewModel by viewModels()
+    private val genreViewModel : GenreViewModel by viewModels()
 
     private var binding : FragmentHomeBinding? = null
     private lateinit var movieAdapter: MovieAdapter
+
+    private var genreList : List<GenreData>? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,25 +52,39 @@ class HomeFragment : Fragment() {
 
         setUpViewPager()
 
-        viewModel.getObserverRecentMovie().observe(viewLifecycleOwner, object  : Observer<Movie>{
-            override fun onChanged(t: Movie?) {
+
+
+        viewModel.getObserverRecentMovie().observe(viewLifecycleOwner
+        ) { t ->
+            if (t != null) {
+                //println("veri geldi mi"+t.result[0].title+" "+t.result[1].title)
+                println("genreList-Size: " + genreList!!.size)
+                movieAdapter.setList(t.results,genreList!!)
+
+
+            } else {
+                println("t boş geldi")
+            }
+        }
+        genreViewModel.getRecordsObserver().observe(viewLifecycleOwner,object : Observer<List<GenreData>>{
+            override fun onChanged(t: List<GenreData>?) {
                 if(t != null){
-                    //println("veri geldi mi"+t.result[0].title+" "+t.result[1].title)
-                    println("veri var"+t.results[0].title)
-                    movieAdapter.setList(t.results)
-
-
+                    genreList=t
+                    println("Boyut : "+t.size)
+                    fetchMovies()
                 }else{
-                    println("t boş geldi")
+                    println("t-genreList boş")
                 }
             }
 
         })
 
+
         fetchMovies()
 
 
     }
+
 
     private fun setUpViewPager() {
         movieAdapter= MovieAdapter()
@@ -87,7 +107,6 @@ class HomeFragment : Fragment() {
         movieViewPager.setPageTransformer(compositePageTransformer)
         movieViewPager.adapter=movieAdapter
 
-        println("setUpViewPager")
 
     }
 
@@ -98,8 +117,8 @@ class HomeFragment : Fragment() {
                 viewModel.loadRecentMovieData("1")
             }
 
-            job1.await()
 
+            job1.await()
 
         }
     }

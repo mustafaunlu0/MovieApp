@@ -34,8 +34,6 @@ class MainActivity : AppCompatActivity() {
             setUpTabBar()
         }
 
-        println("Kaç kere girecek")
-
 
 
 

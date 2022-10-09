@@ -6,24 +6,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentIntroBinding
 import com.mustafaunlu.movieapp.models.promotion.Promotion
 import com.mustafaunlu.movieapp.db.pref.SessionManager
+import com.mustafaunlu.movieapp.db.room.GenreData
+import com.mustafaunlu.movieapp.viewmodel.GenreViewModel
+import com.mustafaunlu.movieapp.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class IntroFragment : Fragment() {
 
+    //viewModel
+    private val viewmodel : HomeViewModel by viewModels()
+    private val genreViewModel : GenreViewModel by viewModels()
+
+    //Genre List
+    private var genreList : MutableList<GenreData>? = null
+
     //View Binding
     private  var binding : FragmentIntroBinding? = null;
+
     //Promotions
     private lateinit var promotionInternet : Promotion
     private lateinit var promotionMovies : Promotion
     private lateinit var promotionNotification : Promotion
     private var proNumber : Int = 0
+
     //Across
     @Inject
     lateinit var sessionManager: SessionManager
@@ -31,6 +45,7 @@ class IntroFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        genreList= mutableListOf()
 
 
 
@@ -49,10 +64,33 @@ class IntroFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            sessionManager.setIsFirstRun(false)
+
+
+        viewmodel.getObserverGenre().observe(viewLifecycleOwner){
+            if(it != null){
+                for(item in it.genres){
+                    val genre=GenreData(0,item.id,item.name)
+                    genreList!!.add(genre)
+                }
+                genreViewModel.addAllGenres(genreList!!)
+                println("veri eklendi")
+            }
+            else{
+                println("it(genre) null")
+            }
+        }
+
+
+        if(sessionManager.getIsFirstRun()){
+            viewmodel.loadGenreData()
             Toast.makeText(context, "ilk giriş",Toast.LENGTH_SHORT).show()
             createPromotions()
             placePromotion()
+        }else{
+            findNavController().navigate(R.id.action_introFragment2_to_homeFragment)
+        }
+        sessionManager.setIsFirstRun(false)
+
 
 
 
@@ -60,10 +98,10 @@ class IntroFragment : Fragment() {
 
     }
 
+
     private fun placePromotion() {
         promotionInternet.placeData()
         binding!!.promotionNextButton.setOnClickListener {
-            println("Number : "+proNumber)
             proNumber++
             binding!!.promotionPrevButton.visibility=View.VISIBLE
             when(proNumber){
@@ -84,7 +122,7 @@ class IntroFragment : Fragment() {
                 else->{
                     //to Intent
                     Toast.makeText(context, "LOADING..",Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_introFragment_to_mainActivity)
+                    findNavController().navigate(R.id.action_introFragment2_to_homeFragment)
                     proNumber--
                 }
 
@@ -93,7 +131,6 @@ class IntroFragment : Fragment() {
 
         binding!!.promotionPrevButton.setOnClickListener {
             proNumber--
-            println("Number : "+proNumber)
             when(proNumber){
                 0 ->{
                     promotionInternet.placeData()

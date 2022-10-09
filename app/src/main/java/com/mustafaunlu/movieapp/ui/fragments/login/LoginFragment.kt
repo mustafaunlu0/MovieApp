@@ -58,12 +58,8 @@ class LoginFragment : Fragment() {
             val password=binding!!.loginPasswordEditText.text.toString()
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 viewModel.signIn(email, password, requireContext())
-                if(sessionManager.getIsFirstRun()){
-                    sessionManager.setIsFirstRun(false)
-                    findNavController().navigate(R.id.action_loginFragment_to_introFragment)
-                }else{
                     findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
-                }
+
             }else{
                 FancyToast.makeText(requireContext(),"Fill the blanks !",FancyToast.LENGTH_LONG,FancyToast.CONFUSING,false).show();
 
@@ -75,7 +71,7 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
         binding?.forgotPasswordTextView?.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_introFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
         }
 
 

@@ -1,5 +1,6 @@
 package com.mustafaunlu.movieapp.di
 
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.firebase.auth.FirebaseAuth
@@ -10,6 +11,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.mustafaunlu.movieapp.db.pref.SessionManager
+import com.mustafaunlu.movieapp.db.room.GenreDao
+import com.mustafaunlu.movieapp.db.room.GenreDatabase
 import com.mustafaunlu.movieapp.repo.retrofit.RetrofitServiceInstance
 import com.mustafaunlu.movieapp.util.Constants
 import com.mustafaunlu.movieapp.util.Constants.BASE_URL
@@ -56,6 +59,21 @@ object AppModule {
     fun provideAuthInstance() : FirebaseAuth{
         return Firebase.auth
     }
+
+    //ROOM
+
+    @Provides
+    @Singleton
+    fun getDB(context: Application) : GenreDatabase{
+        return GenreDatabase.getAppDB(context)
+    }
+
+    @Provides
+    @Singleton
+    fun getDao(appDB : GenreDatabase) : GenreDao{
+        return appDB.getDAO()
+    }
+
 
     //RETROFIT
 

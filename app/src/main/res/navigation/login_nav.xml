@@ -14,9 +14,6 @@
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_introFragment"
-            app:destination="@id/introFragment" />
-        <action
             android:id="@+id/action_loginFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
     </fragment>
@@ -26,19 +23,7 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUpFragment_to_introFragment"
-            app:destination="@id/introFragment" />
-        <action
             android:id="@+id/action_signUpFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
-    </fragment>
-    <fragment
-        android:id="@+id/introFragment"
-        android:name="com.mustafaunlu.movieapp.ui.fragments.intro.IntroFragment"
-        android:label="fragment_intro"
-        tools:layout="@layout/fragment_intro" >
-        <action
-            android:id="@+id/action_introFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
     </fragment>
     <activity
