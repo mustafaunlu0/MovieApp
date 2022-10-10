@@ -11,11 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.adapter.MovieAdapter
 import com.mustafaunlu.movieapp.databinding.FragmentHomeBinding
 import com.mustafaunlu.movieapp.db.room.GenreData
 import com.mustafaunlu.movieapp.models.api.Movie
+import com.mustafaunlu.movieapp.models.api.Result
 import com.mustafaunlu.movieapp.viewmodel.GenreViewModel
 import com.mustafaunlu.movieapp.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +34,8 @@ class HomeFragment : Fragment() {
     private lateinit var movieAdapter: MovieAdapter
 
     private var genreList : List<GenreData>? = null
+
+    private lateinit var movieViewPager : ViewPager2
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,8 +61,6 @@ class HomeFragment : Fragment() {
         viewModel.getObserverRecentMovie().observe(viewLifecycleOwner
         ) { t ->
             if (t != null) {
-                //println("veri geldi mi"+t.result[0].title+" "+t.result[1].title)
-                println("genreList-Size: " + genreList!!.size)
                 movieAdapter.setList(t.results,genreList!!)
 
 
@@ -66,14 +68,28 @@ class HomeFragment : Fragment() {
                 println("t boş geldi")
             }
         }
+        viewModel.getObserverPopularMovie().observe(viewLifecycleOwner){
+
+            if(it != null){
+
+                val rndm=(0..19).random()
+                val randomMovie=it.results[rndm]
+                println("random sayı : $rndm")
+                placePopularMovie(randomMovie)
+            }else{
+                println("t null geldi")
+            }
+        }
+
+
+
         genreViewModel.getRecordsObserver().observe(viewLifecycleOwner,object : Observer<List<GenreData>>{
             override fun onChanged(t: List<GenreData>?) {
                 if(t != null){
                     genreList=t
-                    println("Boyut : "+t.size)
                     fetchMovies()
                 }else{
-                    println("t-genreList boş")
+
                 }
             }
 
@@ -84,11 +100,30 @@ class HomeFragment : Fragment() {
 
 
     }
+    private fun placePopularMovie(randomMovie : Result){
+
+        var genres =""
+        binding!!.recommendedTitleTextView.text=randomMovie.title
+        binding!!.recommendedDateTextView.text=randomMovie.release_date
+        println("oran :" +randomMovie.vote_average)
+        binding!!.ratingBar.rating= (randomMovie.vote_average/2).toFloat()
+        for(id in randomMovie.genre_ids){
+            var result=genreList!!.find { x -> x.genre_id==id }
+            if(result != null){
+                genres +=result.genre_name_en +", "
+            }
+        }
+        genres=genres.substring(0,genres.length-2)
+        binding!!.recommendedGenreTextView.text=genres
+        Glide.with(binding!!.recommendedImageView).load("https://image.tmdb.org/t/p/w342/"+randomMovie.poster_path).into(binding!!.recommendedImageView)
+
+
+    }
 
 
     private fun setUpViewPager() {
         movieAdapter= MovieAdapter()
-        val movieViewPager : ViewPager2 =binding!!.moviesViewPager
+        movieViewPager =binding!!.moviesViewPager
         movieViewPager.clipToPadding=false
         movieViewPager.clipChildren=false
         movieViewPager.offscreenPageLimit=3
@@ -116,9 +151,13 @@ class HomeFragment : Fragment() {
             val job1 : Deferred<Unit> = async {
                 viewModel.loadRecentMovieData("1")
             }
+            val job2 : Deferred<Unit> = async {
+                viewModel.loadPopularMovieData("1")
+            }
 
 
             job1.await()
+            job2.await()
 
         }
     }

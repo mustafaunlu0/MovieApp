@@ -67,7 +67,7 @@ class MovieAdapter (private val isFirstScreen : Boolean =true)  :
         return if(resultList == null)
             0
         else if(isFirstScreen)
-            resultList!!.size
+            4
         else
             resultList!!.size
     }
