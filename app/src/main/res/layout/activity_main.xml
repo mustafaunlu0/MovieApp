@@ -12,7 +12,7 @@
     >
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/mainFragmentContainerView"
+        android:id="@+id/fragmentView"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,5 +29,7 @@
         android:elevation="5dp"
         android:background="@color/appColor"
         app:cnb_menuResource="@menu/menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingClass"/>
 </FrameLayout>

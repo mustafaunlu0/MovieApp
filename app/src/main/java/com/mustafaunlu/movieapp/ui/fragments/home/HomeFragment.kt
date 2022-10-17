@@ -1,5 +1,6 @@
 package com.mustafaunlu.movieapp.ui.fragments.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -14,10 +18,11 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.adapter.MovieAdapter
+import com.mustafaunlu.movieapp.adapter.SendDataListener
 import com.mustafaunlu.movieapp.databinding.FragmentHomeBinding
 import com.mustafaunlu.movieapp.db.room.GenreData
-import com.mustafaunlu.movieapp.models.api.Movie
 import com.mustafaunlu.movieapp.models.api.Result
+import com.mustafaunlu.movieapp.ui.activities.DetailActivity
 import com.mustafaunlu.movieapp.viewmodel.GenreViewModel
 import com.mustafaunlu.movieapp.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +30,7 @@ import kotlinx.coroutines.*
 import kotlin.math.abs
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), SendDataListener{
 
     private val viewModel : HomeViewModel by viewModels()
     private val genreViewModel : GenreViewModel by viewModels()
@@ -37,9 +42,12 @@ class HomeFragment : Fragment() {
 
     private lateinit var movieViewPager : ViewPager2
 
+    private lateinit var randomMovie : Result
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        println("HomeFragment OnCreate")
 
     }
 
@@ -58,10 +66,12 @@ class HomeFragment : Fragment() {
 
 
 
+
+
         viewModel.getObserverRecentMovie().observe(viewLifecycleOwner
         ) { t ->
             if (t != null) {
-                movieAdapter.setList(t.results,genreList!!)
+                movieAdapter.setList(t.results,genreList!!,this)
 
 
             } else {
@@ -73,8 +83,8 @@ class HomeFragment : Fragment() {
             if(it != null){
 
                 val rndm=(0..19).random()
-                val randomMovie=it.results[rndm]
-                println("random sayı : $rndm")
+                randomMovie=it.results[rndm]
+
                 placePopularMovie(randomMovie)
             }else{
                 println("t null geldi")
@@ -98,6 +108,14 @@ class HomeFragment : Fragment() {
 
         fetchMovies()
 
+        binding!!.imageLayout.setOnClickListener {
+            val intent= Intent(activity,DetailActivity::class.java)
+            intent.putExtra("url",randomMovie.poster_path)
+            intent.putExtra("overview",randomMovie.overview)
+            intent.putExtra("date",randomMovie.release_date)
+            intent.putExtra("title",randomMovie.title)
+            startActivity(intent)
+        }
 
     }
     private fun placePopularMovie(randomMovie : Result){
@@ -105,7 +123,6 @@ class HomeFragment : Fragment() {
         var genres =""
         binding!!.recommendedTitleTextView.text=randomMovie.title
         binding!!.recommendedDateTextView.text=randomMovie.release_date
-        println("oran :" +randomMovie.vote_average)
         binding!!.ratingBar.rating= (randomMovie.vote_average/2).toFloat()
         for(id in randomMovie.genre_ids){
             var result=genreList!!.find { x -> x.genre_id==id }
@@ -160,6 +177,18 @@ class HomeFragment : Fragment() {
             job2.await()
 
         }
+    }
+
+    override fun sendData(data: Result) {
+        println("sendData")
+        val intent= Intent(activity,DetailActivity::class.java)
+        intent.putExtra("url",data.poster_path)
+        intent.putExtra("overview",data.overview)
+        intent.putExtra("date",data.release_date)
+        intent.putExtra("title",data.title)
+        startActivity(intent)
+
+
     }
 
 

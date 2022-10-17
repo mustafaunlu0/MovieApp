@@ -1,6 +1,8 @@
 package com.mustafaunlu.movieapp.ui.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.findNavController
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.ActivityMainBinding
 import com.mustafaunlu.movieapp.db.pref.SessionManager
@@ -18,21 +20,20 @@ class MainActivity : AppCompatActivity() {
 
     private var binding : ActivityMainBinding? = null
 
-    private lateinit var homeFragment: HomeFragment
-    private lateinit var feedFragment: FeedFragment
-    private lateinit var profileFragment: ProfileFragment
+    private  var homeFragment: HomeFragment = HomeFragment()
+    private  var feedFragment: FeedFragment=FeedFragment()
+    private var profileFragment: ProfileFragment=ProfileFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        homeFragment=HomeFragment()
-        feedFragment=FeedFragment()
-        profileFragment=ProfileFragment()
 
         if(binding != null){
             setUpTabBar()
         }
+
+
 
 
 
@@ -44,14 +45,16 @@ class MainActivity : AppCompatActivity() {
     private fun setUpTabBar()
     {
 
-        binding!!.bottomNavBar.setItemSelected(R.id.home,true)
+
+
+        //binding!!.bottomNavBar.setItemSelected(R.id.home,true)
         binding!!.bottomNavBar.setOnItemSelectedListener {
             when(it){
-                R.id.home -> supportFragmentManager.beginTransaction().replace(R.id.mainFragmentContainerView,homeFragment).commit()
+                R.id.home -> supportFragmentManager.beginTransaction().replace(R.id.fragmentView,homeFragment).commit()
 
-                R.id.feed -> supportFragmentManager.beginTransaction().replace(R.id.mainFragmentContainerView,feedFragment).commit()
+                R.id.feed -> supportFragmentManager.beginTransaction().replace(R.id.fragmentView,feedFragment).commit()
 
-                R.id.profile -> supportFragmentManager.beginTransaction().replace(R.id.mainFragmentContainerView,profileFragment).commit()
+                R.id.profile -> supportFragmentManager.beginTransaction().replace(R.id.fragmentView,profileFragment).commit()
 
             }
         }

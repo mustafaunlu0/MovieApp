@@ -5,21 +5,25 @@ import android.view.ViewGroup
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.db.room.GenreData
 import com.mustafaunlu.movieapp.models.api.Result
+import com.mustafaunlu.movieapp.ui.fragments.home.HomeFragment
 
 class MovieAdapter (private val isFirstScreen : Boolean =true)  :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     var resultList : List<Result>?= null
     var genreList : List<GenreData>? = null
+    lateinit var listener : SendDataListener
 
-    fun setList(resultList : List<Result>, genreList: List<GenreData>){
+    fun setList(resultList: List<Result>, genreList: List<GenreData>, listener: SendDataListener){
         this.resultList=resultList
         this.genreList=genreList
+        this.listener=listener
         notifyDataSetChanged()
     }
 
@@ -59,8 +63,15 @@ class MovieAdapter (private val isFirstScreen : Boolean =true)  :
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        //hata burada!!! genreLst koyunca patlıyor
         holder.bind(resultList!![position],genreList!!)
+        holder.itemView.setOnClickListener {
+            println("problem olabilir-1")
+            var resultMovie=resultList!![position]
+            println("problem olabilir-2")
+            println("result Movie: "+resultMovie.title)
+            listener.sendData(resultMovie)
+            println("problem olabilir-3")
+        }
     }
 
     override fun getItemCount(): Int {
