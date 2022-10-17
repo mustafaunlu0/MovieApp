@@ -12,9 +12,11 @@
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/button_background.xml" value="0.15" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_account.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_android_black.xml" value="0.1" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_dislike.xml" value="0.3115" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_favorite.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_feedd.xml" value="0.17" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_home.xml" value="0.1" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_like.xml" value="0.3115" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/ic_popcorn.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/splash_inset.xml" value="0.2" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/title_background.xml" value="0.1" />
@@ -22,6 +24,7 @@
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/activity_login.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/activity_splash.xml" value="0.3625" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/feed_row.xml" value="0.3212962962962963" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_feed.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_intro.xml" value="0.25" />
