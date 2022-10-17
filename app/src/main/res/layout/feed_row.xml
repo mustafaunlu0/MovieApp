@@ -105,6 +105,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             >
+
             <TextView
                 android:id="@+id/postTextView"
                 android:layout_width="match_parent"
@@ -112,9 +113,7 @@
                 android:text="@string/LoremIpsum"
                 android:textColor="@color/black"/>
 
-
         </LinearLayout>
-
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
