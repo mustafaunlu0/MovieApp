@@ -68,6 +68,8 @@ class HomeFragment : Fragment(), SendDataListener{
 
 
 
+
+
         viewModel.getObserverRecentMovie().observe(viewLifecycleOwner
         ) { t ->
             if (t != null) {

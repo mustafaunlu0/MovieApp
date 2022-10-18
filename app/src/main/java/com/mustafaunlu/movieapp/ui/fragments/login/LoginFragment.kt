@@ -28,12 +28,14 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        /*
         if(viewModel.isCurrentUser(requireContext())){
             val intent=Intent(context, MainActivity::class.java);
             startActivity(intent)
             requireActivity().finish();
         }
+
+         */
 
 
 
@@ -69,6 +71,9 @@ class LoginFragment : Fragment() {
         }
         binding?.newTextView?.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+        }
+        binding!!.forgotPasswordTextView.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_postFragment)
         }
 
 
