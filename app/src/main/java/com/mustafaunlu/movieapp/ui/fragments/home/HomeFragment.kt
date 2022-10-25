@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IdRes
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -111,12 +114,8 @@ class HomeFragment : Fragment(), SendDataListener{
         fetchMovies()
 
         binding!!.imageLayout.setOnClickListener {
-            val intent= Intent(activity,DetailActivity::class.java)
-            intent.putExtra("url",randomMovie.poster_path)
-            intent.putExtra("overview",randomMovie.overview)
-            intent.putExtra("date",randomMovie.release_date)
-            intent.putExtra("title",randomMovie.title)
-            startActivity(intent)
+            val action=HomeFragmentDirections.actionHomeFragment2ToDetailFragment(randomMovie.poster_path,randomMovie.title,randomMovie.overview,randomMovie.release_date)
+            findNavController().navigate(action)
         }
 
     }
@@ -151,8 +150,6 @@ class HomeFragment : Fragment(), SendDataListener{
         compositePageTransformer.addTransformer(MarginPageTransformer(10))
         compositePageTransformer.addTransformer { page, position ->
             val r =1 - abs(position)
-            //page.scaleY=0.85f + r + 0.15f
-            //page.scaleY=0.8f +(r/5)
             page.scaleY=0.8f +(r/5)
             page.scaleX=1f +(r/5)
 
@@ -182,16 +179,13 @@ class HomeFragment : Fragment(), SendDataListener{
     }
 
     override fun sendData(data: Result) {
-        println("sendData")
-        val intent= Intent(activity,DetailActivity::class.java)
-        intent.putExtra("url",data.poster_path)
-        intent.putExtra("overview",data.overview)
-        intent.putExtra("date",data.release_date)
-        intent.putExtra("title",data.title)
-        startActivity(intent)
+        val action=HomeFragmentDirections.actionHomeFragment2ToDetailFragment(data.poster_path,data.title,data.overview,data.release_date)
+        findNavController().navigate(action)
+
 
 
     }
+
 
 
 }

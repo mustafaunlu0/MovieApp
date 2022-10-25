@@ -1,14 +1,13 @@
 package com.mustafaunlu.movieapp.ui.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.findNavController
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.ActivityMainBinding
 import com.mustafaunlu.movieapp.db.pref.SessionManager
-import com.mustafaunlu.movieapp.ui.fragments.home.FeedFragment
 import com.mustafaunlu.movieapp.ui.fragments.home.HomeFragment
-import com.mustafaunlu.movieapp.ui.fragments.home.ProfileFragment
+import com.mustafaunlu.movieapp.ui.fragments.profile.ProfileFragment
+import com.mustafaunlu.movieapp.ui.fragments.feed.FlowFragment
+import com.mustafaunlu.movieapp.ui.fragments.home.MovieFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -20,9 +19,9 @@ class MainActivity : AppCompatActivity() {
 
     private var binding : ActivityMainBinding? = null
 
-    private  var homeFragment: HomeFragment = HomeFragment()
-    private  var feedFragment: FeedFragment=FeedFragment()
-    private var profileFragment: ProfileFragment=ProfileFragment()
+    private  var movieFragment: MovieFragment = MovieFragment()
+    private  var flowFragment: FlowFragment = FlowFragment()
+    private var profileFragment: ProfileFragment = ProfileFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -50,9 +49,9 @@ class MainActivity : AppCompatActivity() {
         //binding!!.bottomNavBar.setItemSelected(R.id.home,true)
         binding!!.bottomNavBar.setOnItemSelectedListener {
             when(it){
-                R.id.home -> supportFragmentManager.beginTransaction().replace(R.id.fragmentView,homeFragment).commit()
+                R.id.home -> supportFragmentManager.beginTransaction().replace(R.id.fragmentView,movieFragment).commit()
 
-                R.id.feed -> supportFragmentManager.beginTransaction().replace(R.id.fragmentView,feedFragment).commit()
+                R.id.flow -> supportFragmentManager.beginTransaction().replace(R.id.fragmentView,flowFragment).commit()
 
                 R.id.profile -> supportFragmentManager.beginTransaction().replace(R.id.fragmentView,profileFragment).commit()
 

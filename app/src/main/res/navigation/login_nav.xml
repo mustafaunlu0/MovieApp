@@ -36,7 +36,7 @@
         tools:layout="@layout/activity_main" />
     <fragment
         android:id="@+id/postFragment"
-        android:name="com.mustafaunlu.movieapp.ui.fragments.home.PostFragment"
+        android:name="com.mustafaunlu.movieapp.ui.fragments.feed.PostFragment"
         android:label="fragment_post"
         tools:layout="@layout/fragment_post" />
 </navigation>

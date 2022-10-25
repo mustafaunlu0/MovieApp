@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mustafaunlu.movieapp.models.api.Genre
 import com.mustafaunlu.movieapp.models.api.Movie
+import com.mustafaunlu.movieapp.models.api.Result
 import com.mustafaunlu.movieapp.repo.retrofit.RetrofitRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -14,6 +15,7 @@ class HomeViewModel @Inject constructor(private val repository: RetrofitReposito
     private var popularMovieList : MutableLiveData<Movie> = MutableLiveData()
     private var recentMovieList : MutableLiveData<Movie> = MutableLiveData()
     private var genreList : MutableLiveData<Genre> = MutableLiveData()
+    private  var selectedMovie : MutableLiveData<Result> = MutableLiveData()
 
 
 
@@ -29,6 +31,7 @@ class HomeViewModel @Inject constructor(private val repository: RetrofitReposito
         return genreList
     }
 
+
     fun loadRecentMovieData(page : String){
         repository.getRecentMovies(page,recentMovieList)
     }
@@ -38,5 +41,6 @@ class HomeViewModel @Inject constructor(private val repository: RetrofitReposito
     fun loadGenreData(){
         repository.getGenres(genreList)
     }
+
 
 }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -79,14 +80,7 @@
                 android:textStyle="bold"
                 android:textSize="28sp"
                 android:textColor="#FB8C00"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="6dp"
-                android:layout_marginBottom="6dp"
-                android:text="Overview"
-                android:textSize="18sp"
-                android:textColor="#FB8C00"/>
+
             <TextView
                 android:id="@+id/overviewTextView"
                 android:layout_width="match_parent"

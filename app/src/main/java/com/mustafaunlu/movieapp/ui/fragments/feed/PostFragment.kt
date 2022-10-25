@@ -1,4 +1,4 @@
-package com.mustafaunlu.movieapp.ui.fragments.home
+package com.mustafaunlu.movieapp.ui.fragments.feed
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.findNavController
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentPostBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class PostFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private var binding : FragmentPostBinding? = null
@@ -38,6 +40,10 @@ class PostFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val arrayAdapter=ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item,movieCategory)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter=arrayAdapter
+
+        binding?.postButton?.setOnClickListener {
+            findNavController().navigate(R.id.action_postFragment2_to_feedFragment)
+        }
 
 
     }

@@ -9,6 +9,8 @@ import com.mustafaunlu.movieapp.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
 
+
+    //Bunu fragmenta çeviricez!
     private var binding : ActivityDetailBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

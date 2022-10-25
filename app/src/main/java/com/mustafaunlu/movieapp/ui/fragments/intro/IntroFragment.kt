@@ -87,7 +87,7 @@ class IntroFragment : Fragment() {
             createPromotions()
             placePromotion()
         }else{
-            findNavController().navigate(R.id.action_introFragment2_to_homeFragment)
+            findNavController().navigate(R.id.action_introFragment2_to_movieFragment)
         }
         sessionManager.setIsFirstRun(false)
 
@@ -122,7 +122,7 @@ class IntroFragment : Fragment() {
                 else->{
                     //to Intent
                     Toast.makeText(context, "LOADING..",Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_introFragment2_to_homeFragment)
+                    findNavController().navigate(R.id.action_introFragment2_to_movieFragment)
                     proNumber--
                 }
 

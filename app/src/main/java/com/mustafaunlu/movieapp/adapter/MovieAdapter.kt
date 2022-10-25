@@ -65,12 +65,9 @@ class MovieAdapter (private val isFirstScreen : Boolean =true)  :
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(resultList!![position],genreList!!)
         holder.itemView.setOnClickListener {
-            println("problem olabilir-1")
             var resultMovie=resultList!![position]
-            println("problem olabilir-2")
-            println("result Movie: "+resultMovie.title)
             listener.sendData(resultMovie)
-            println("problem olabilir-3")
+
         }
     }
 
