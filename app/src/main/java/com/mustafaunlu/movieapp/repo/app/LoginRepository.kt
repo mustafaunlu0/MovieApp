@@ -32,10 +32,7 @@ class LoginRepository @Inject constructor(
                     FancyToast.makeText(context,"Login..",
                         FancyToast.LENGTH_LONG,
                         FancyToast.SUCCESS,false).show();
-                    //val intent=Intent(context,MainActivity::class.java);
-                    //context.startActivity(intent)
 
-                    // you dont finish activity -> requireActivity().finish();
                 }
 
             }.addOnFailureListener {
@@ -76,6 +73,8 @@ class LoginRepository @Inject constructor(
                         FancyToast.makeText(context,"Successful Login!",
                             FancyToast.LENGTH_LONG,
                             FancyToast.SUCCESS,false).show();
+
+
 
                         //val intent=Intent(context,MainActivity::class.java);
                         //context.startActivity(intent)

@@ -10,19 +10,20 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentDetailBinding
-import com.mustafaunlu.movieapp.models.api.Result
-import com.mustafaunlu.movieapp.viewmodel.HomeViewModel
+import com.mustafaunlu.movieapp.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DetailFragment: Fragment() {
+class DetailFragment : Fragment() {
 
     private var binding : FragmentDetailBinding? = null
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: MovieViewModel by viewModels()
     private val args : DetailFragmentArgs by navArgs()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,12 +47,14 @@ class DetailFragment: Fragment() {
 
 
 
-
-
-
             binding!!.prevButton.setOnClickListener {
                 findNavController().navigate(R.id.action_detailFragment_to_homeFragment2)
                 println("tıklandı")
+            }
+
+            binding!!.likeFab.setOnClickListener {
+                viewModel.likeMovie(viewModel.getCurrentUserEmail(),args.imageUrl,args.title,args.overview,args.date,requireContext())
+                findNavController().navigate(R.id.action_detailFragment_to_homeFragment2)
             }
 
 

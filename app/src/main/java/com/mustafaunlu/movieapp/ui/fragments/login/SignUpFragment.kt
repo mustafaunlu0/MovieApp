@@ -71,7 +71,7 @@ class SignUpFragment  : Fragment() {
 
             if(username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && passwordAgain.isNotEmpty()
                 && selectedPicture != null){
-                viewModel.signUp(email,username,password,passwordAgain, selectedPicture!!,context!!)
+                viewModel.signUp(email,username,password,passwordAgain, selectedPicture!!,requireContext())
 
                     findNavController().navigate(R.id.action_signUpFragment_to_mainActivity)
 
@@ -85,10 +85,10 @@ class SignUpFragment  : Fragment() {
     }
 
     private fun selectImage() {
-        if(ContextCompat.checkSelfPermission(context!!,android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+        if(ContextCompat.checkSelfPermission(requireContext(),android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
 
-            if(ActivityCompat.shouldShowRequestPermissionRationale(activity!!,android.Manifest.permission.READ_EXTERNAL_STORAGE)){
-                Snackbar.make(view!!,"Permission needed for gallery",Snackbar.LENGTH_INDEFINITE).setAction("Give permission", View.OnClickListener {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),android.Manifest.permission.READ_EXTERNAL_STORAGE)){
+                Snackbar.make(requireView(),"Permission needed for gallery",Snackbar.LENGTH_INDEFINITE).setAction("Give permission", View.OnClickListener {
                     //request permission
                     permissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 }).show()
