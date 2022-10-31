@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -19,8 +20,10 @@ import com.mustafaunlu.movieapp.databinding.FragmentHomeBinding
 import com.mustafaunlu.movieapp.db.pref.SessionManager
 import com.mustafaunlu.movieapp.db.room.GenreData
 import com.mustafaunlu.movieapp.models.api.Result
+import com.mustafaunlu.movieapp.viewmodel.FirebaseCallback
 import com.mustafaunlu.movieapp.viewmodel.GenreViewModel
 import com.mustafaunlu.movieapp.viewmodel.HomeViewModel
+import com.mustafaunlu.movieapp.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -28,9 +31,10 @@ import kotlin.math.abs
 import kotlin.random.Random
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), SendDataListener{
+class HomeFragment : Fragment(), SendDataListener, FirebaseCallback{
 
     private val viewModel : HomeViewModel by viewModels()
+    private val movieViewModel : MovieViewModel by viewModels()
     private val genreViewModel : GenreViewModel by viewModels()
 
     private var binding : FragmentHomeBinding? = null
@@ -66,11 +70,6 @@ class HomeFragment : Fragment(), SendDataListener{
         super.onViewCreated(view, savedInstanceState)
 
         setUpViewPager()
-
-
-
-
-
 
         viewModel.getObserverRecentMovie().observe(viewLifecycleOwner
         ) { t ->
@@ -119,6 +118,13 @@ class HomeFragment : Fragment(), SendDataListener{
             findNavController().navigate(action)
         }
 
+
+        binding!!.favoriteImageView.setOnClickListener{
+            movieViewModel.likeMovie(movieViewModel.getCurrentUserEmail(),randomMovie.poster_path,randomMovie.title,randomMovie.overview,randomMovie.release_date,requireContext())
+            binding!!.favoriteImageView.isVisible=false
+
+        }
+
     }
     private fun placePopularMovie(randomMovie : Result){
 
@@ -136,6 +142,8 @@ class HomeFragment : Fragment(), SendDataListener{
         binding!!.recommendedGenreTextView.text=genres
         Glide.with(binding!!.recommendedImageView).load("https://image.tmdb.org/t/p/w342/"+randomMovie.poster_path).into(binding!!.recommendedImageView)
 
+
+        movieViewModel.getLikedMovie(randomMovie.title,this)
 
     }
 
@@ -188,6 +196,9 @@ class HomeFragment : Fragment(), SendDataListener{
 
     }
 
+    override fun onResponse(size: Int) {
+        binding!!.favoriteImageView.isVisible = size <= 0
+    }
 
 
 }
