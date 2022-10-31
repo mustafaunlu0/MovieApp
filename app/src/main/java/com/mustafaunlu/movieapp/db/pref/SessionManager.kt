@@ -10,11 +10,23 @@ class SessionManager @Inject constructor(
 
     fun getIsFirstRun() = preferences.getBoolean(Constants.FIRST_RUN_KEY,true)
 
+
+
+    fun getPosition() = preferences.getInt(Constants.POSITION,9999)
+
+
+
     fun setIsFirstRun(value : Boolean){
         val editor=preferences.edit()
         editor.putBoolean(Constants.FIRST_RUN_KEY,value)
         editor.apply()
     }
+    fun setPosition(value : Int){
+        val editor=preferences.edit()
+        editor.putInt(Constants.POSITION,value).apply()
+    }
+
+
 
 
 

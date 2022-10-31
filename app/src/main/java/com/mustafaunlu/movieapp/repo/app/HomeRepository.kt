@@ -26,14 +26,14 @@ class HomeRepository @Inject constructor(
 
         firestore.collection("Liked-Movie").document(userMail).collection(title).add(likeMap).addOnSuccessListener {
 
-            FancyToast.makeText(context,"Successful Login!",
+            FancyToast.makeText(context,"Liked!",
                 FancyToast.LENGTH_LONG,
-                FancyToast.SUCCESS,false).show();
+                FancyToast.SUCCESS,false).show()
 
         }.addOnFailureListener { exception ->
             FancyToast.makeText(context,exception.localizedMessage,
                 FancyToast.LENGTH_LONG,
-                FancyToast.ERROR,false).show();
+                FancyToast.ERROR,false).show()
 
         }
 

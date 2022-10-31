@@ -16,6 +16,7 @@ import com.mustafaunlu.movieapp.ui.fragments.home.HomeFragment
 class MovieAdapter (private val isFirstScreen : Boolean =true)  :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
+
     var resultList : List<Result>?= null
     var genreList : List<GenreData>? = null
     lateinit var listener : SendDataListener
@@ -24,6 +25,7 @@ class MovieAdapter (private val isFirstScreen : Boolean =true)  :
         this.resultList=resultList
         this.genreList=genreList
         this.listener=listener
+
         notifyDataSetChanged()
     }
 
@@ -65,11 +67,14 @@ class MovieAdapter (private val isFirstScreen : Boolean =true)  :
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(resultList!![position],genreList!!)
         holder.itemView.setOnClickListener {
-            var resultMovie=resultList!![position]
-            listener.sendData(resultMovie)
+            val resultMovie=resultList!![position]
+            listener.sendData(resultMovie,position)
+
+            println("onBindView: "+position)
 
         }
     }
+
 
     override fun getItemCount(): Int {
         return if(resultList == null)
@@ -78,5 +83,12 @@ class MovieAdapter (private val isFirstScreen : Boolean =true)  :
             4
         else
             resultList!!.size
+    }
+
+    fun removeMovieFromList(position : Int){
+        println("position: "+position)
+        //notifyItemRangeChanged(position,resultList!!.size)
+        //resultList=resultList!!.drop(position)
+        //notifyItemRemoved(position)
     }
 }

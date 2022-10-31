@@ -16,13 +16,16 @@ import com.bumptech.glide.Glide
 import com.mustafaunlu.movieapp.adapter.MovieAdapter
 import com.mustafaunlu.movieapp.adapter.SendDataListener
 import com.mustafaunlu.movieapp.databinding.FragmentHomeBinding
+import com.mustafaunlu.movieapp.db.pref.SessionManager
 import com.mustafaunlu.movieapp.db.room.GenreData
 import com.mustafaunlu.movieapp.models.api.Result
 import com.mustafaunlu.movieapp.viewmodel.GenreViewModel
 import com.mustafaunlu.movieapp.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import javax.inject.Inject
 import kotlin.math.abs
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), SendDataListener{
@@ -39,10 +42,15 @@ class HomeFragment : Fragment(), SendDataListener{
 
     private lateinit var randomMovie : Result
 
+    //data neden değişmiyor!
+
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        println("HomeFragment OnCreate")
+
 
     }
 
@@ -64,10 +72,11 @@ class HomeFragment : Fragment(), SendDataListener{
 
 
 
-
         viewModel.getObserverRecentMovie().observe(viewLifecycleOwner
         ) { t ->
             if (t != null) {
+                println("position- Observer: "+sessionManager.getPosition())
+                //gelen veriyi filtreleme ya da database e çekip onun üzerinde filtreleme ya da adapter üzerinde filtreleme
                 movieAdapter.setList(t.results,genreList!!,this)
 
 
@@ -155,7 +164,7 @@ class HomeFragment : Fragment(), SendDataListener{
 
     private fun fetchMovies() {
         CoroutineScope(Dispatchers.IO).launch {
-
+            val random= Random.nextInt(0,20)
             val job1 : Deferred<Unit> = async {
                 viewModel.loadRecentMovieData("1")
             }
@@ -170,7 +179,8 @@ class HomeFragment : Fragment(), SendDataListener{
         }
     }
 
-    override fun sendData(data: Result) {
+    override fun sendData(data: Result, position : Int) {
+        sessionManager.setPosition(position)
         val action=HomeFragmentDirections.actionHomeFragment2ToDetailFragment(data.poster_path,data.title,data.overview,data.release_date)
         findNavController().navigate(action)
 

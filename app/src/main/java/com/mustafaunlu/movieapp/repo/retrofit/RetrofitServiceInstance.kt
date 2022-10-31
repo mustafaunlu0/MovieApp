@@ -5,6 +5,7 @@ import com.mustafaunlu.movieapp.models.api.Movie
 import com.mustafaunlu.movieapp.util.Constants
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface RetrofitServiceInstance {
@@ -18,4 +19,8 @@ interface RetrofitServiceInstance {
 
     @GET("3/genre/movie/list?api_key=${Constants.API_KEY}")
     fun getGenres() : Call<Genre>
+
+
+
+
 }

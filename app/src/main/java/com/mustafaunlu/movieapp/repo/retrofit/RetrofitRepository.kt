@@ -47,6 +47,7 @@ class RetrofitRepository @Inject constructor(
             override fun onResponse(call: Call<Genre>, response: Response<Genre>) {
                 liveData.postValue(response.body())
 
+
             }
 
             override fun onFailure(call: Call<Genre>, t: Throwable) {
@@ -56,6 +57,7 @@ class RetrofitRepository @Inject constructor(
 
         })
     }
+
 
 }
 
