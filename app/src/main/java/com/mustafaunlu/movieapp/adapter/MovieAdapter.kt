@@ -70,7 +70,6 @@ class MovieAdapter (private val isFirstScreen : Boolean =true)  :
             val resultMovie=resultList!![position]
             listener.sendData(resultMovie,position)
 
-            println("onBindView: "+position)
 
         }
     }
@@ -85,10 +84,5 @@ class MovieAdapter (private val isFirstScreen : Boolean =true)  :
             resultList!!.size
     }
 
-    fun removeMovieFromList(position : Int){
-        println("position: "+position)
-        //notifyItemRangeChanged(position,resultList!!.size)
-        //resultList=resultList!!.drop(position)
-        //notifyItemRemoved(position)
-    }
+
 }

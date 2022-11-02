@@ -172,12 +172,12 @@ class HomeFragment : Fragment(), SendDataListener, FirebaseCallback{
 
     private fun fetchMovies() {
         CoroutineScope(Dispatchers.IO).launch {
-            val random= Random.nextInt(0,20)
+            val random= Random.nextInt(0,5)
             val job1 : Deferred<Unit> = async {
-                viewModel.loadRecentMovieData("1")
+                viewModel.loadRecentMovieData(random.toString())
             }
             val job2 : Deferred<Unit> = async {
-                viewModel.loadPopularMovieData("1")
+                viewModel.loadPopularMovieData(random.toString())
             }
 
 

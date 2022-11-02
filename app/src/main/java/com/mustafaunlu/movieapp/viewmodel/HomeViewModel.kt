@@ -15,7 +15,7 @@ class HomeViewModel @Inject constructor(private val repository: RetrofitReposito
     private var popularMovieList : MutableLiveData<Movie> = MutableLiveData()
     private var recentMovieList : MutableLiveData<Movie> = MutableLiveData()
     private var genreList : MutableLiveData<Genre> = MutableLiveData()
-    private  var selectedMovie : MutableLiveData<Result> = MutableLiveData()
+    private  var namesOfMovie : MutableLiveData<List<Result>> = MutableLiveData()
 
 
 

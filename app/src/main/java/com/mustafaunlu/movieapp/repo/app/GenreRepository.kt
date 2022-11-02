@@ -15,5 +15,8 @@ class GenreRepository @Inject constructor(private val dao : GenreDao) {
     fun addAllGenres(genreList: List<GenreData>){
         dao.addAllGenres(genreList)
     }
+    fun readAllGenres(): List<GenreData> {
+        return dao.readAllData()
+    }
 
 }

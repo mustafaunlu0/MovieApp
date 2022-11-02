@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.mustafaunlu.movieapp.models.api.Genre
 import com.mustafaunlu.movieapp.models.api.Movie
+import com.mustafaunlu.movieapp.models.api.Result
 import retrofit2.Call
 import javax.inject.Inject
 import retrofit2.Callback
@@ -41,6 +42,9 @@ class RetrofitRepository @Inject constructor(
 
         })
     }
+
+
+
 
     fun getGenres(liveData: MutableLiveData<Genre>){
         retrofitServiceInstance.getGenres().enqueue(object  : Callback<Genre>{

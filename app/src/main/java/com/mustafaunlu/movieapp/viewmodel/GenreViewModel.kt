@@ -22,13 +22,13 @@ class GenreViewModel @Inject constructor(
     fun getRecordsObserver() : MutableLiveData<List<GenreData>>{
         return allData
     }
-    fun addGenre(genreData: GenreData){
-        genreRepository.addGenre(genreData)
-        loadRecords()
-    }
+
     fun addAllGenres(genreList: List<GenreData>){
         genreRepository.addAllGenres(genreList)
         loadRecords()
+    }
+    fun readAllGenres(): List<GenreData> {
+        return genreRepository.readAllGenres()
     }
 
 

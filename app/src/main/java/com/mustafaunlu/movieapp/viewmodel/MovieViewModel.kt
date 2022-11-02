@@ -32,6 +32,10 @@ class MovieViewModel @Inject constructor(
         homeRepository.likeMovie(userMail,imageUrl, title,overview ,date,context)
     }
 
+    fun postMovie(userMail: String,movName : String, category : String,postText : String,context: Context){
+        homeRepository.postMovie(userMail, movName,category,postText, context)
+    }
+
 
 
     fun getCurrentUserEmail() : String{

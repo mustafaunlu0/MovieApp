@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         />
     <LinearLayout
-        android:id="@+id/categoryLayout"
+        android:id="@+id/movieLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -40,8 +40,8 @@
             android:textSize="23sp"
             android:textColor="@color/white"/>
 
-        <Spinner
-            android:id="@+id/spinner"
+        <EditText
+            android:id="@+id/movNameEditText"
             android:layout_width="200dp"
             android:layout_height="30dp"
             android:layout_marginTop="2dp"
@@ -51,6 +51,37 @@
             android:background="@drawable/background_input"
             app:layout_constraintTop_toBottomOf="@id/pTextView"
             />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/categoryLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movieLayout"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        >
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category: "
+            android:textSize="23sp"
+            android:textColor="@color/white"/>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/background_input"
+            android:foregroundTint="@color/white"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toBottomOf="@id/pTextView" />
     </LinearLayout>
 
 

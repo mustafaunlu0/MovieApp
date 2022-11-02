@@ -38,4 +38,26 @@ class HomeRepository @Inject constructor(
         }
 
     }
+
+    fun postMovie(userMail: String,movName : String,category: String, postText : String,context: Context){
+        val postMap= hashMapOf<String,Any>()
+        postMap["movName"]=movName
+        postMap["category"]=category
+        postMap["postText"]=postText
+
+        firestore.collection("Posts").document(userMail).collection(movName).add(postMap).addOnSuccessListener {
+            FancyToast.makeText(context,"Posted!",
+                FancyToast.LENGTH_LONG,
+                FancyToast.SUCCESS,false).show()
+
+        }.addOnFailureListener { exception ->
+            FancyToast.makeText(context,exception.localizedMessage,
+                FancyToast.LENGTH_LONG,
+                FancyToast.ERROR,false).show()
+
+        }
+
+
+
+    }
 }
