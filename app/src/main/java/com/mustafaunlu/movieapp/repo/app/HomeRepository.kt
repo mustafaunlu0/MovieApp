@@ -3,6 +3,7 @@ package com.mustafaunlu.movieapp.repo.app
 import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.mustafaunlu.movieapp.models.post.Post
 import com.shashank.sony.fancytoastlib.FancyToast
 import javax.inject.Inject
 
@@ -10,6 +11,7 @@ class HomeRepository @Inject constructor(
     private val firestore: FirebaseFirestore,
     private val auth : FirebaseAuth
 ){
+    private var postList = ArrayList<Post>()
 
     fun currentUser() : String{
         return auth.currentUser!!.email.toString()
@@ -39,13 +41,14 @@ class HomeRepository @Inject constructor(
 
     }
 
-    fun postMovie(userMail: String,movName : String,category: String, postText : String,context: Context){
+    fun postMovie(username: String,movName : String,category: String, postText : String,context: Context){
         val postMap= hashMapOf<String,Any>()
         postMap["movName"]=movName
         postMap["category"]=category
         postMap["postText"]=postText
+        postMap["username"]=username
 
-        firestore.collection("Posts").document(userMail).collection(movName).add(postMap).addOnSuccessListener {
+        firestore.collection("Posts").add(postMap).addOnSuccessListener {
             FancyToast.makeText(context,"Posted!",
                 FancyToast.LENGTH_LONG,
                 FancyToast.SUCCESS,false).show()
@@ -58,6 +61,19 @@ class HomeRepository @Inject constructor(
         }
 
 
+        //firestore.collection("Posts").document(userMail).collection(movName).add(postMap).addOnSuccessListener
 
     }
+    fun getPost(callback : GetPostList): ArrayList<Post> {
+
+        firestore.collection("Posts").get().addOnSuccessListener {
+            for (item in it){
+                postList.add(Post(item.data["username"].toString(),item.data["movName"].toString(),item.data["category"].toString(),item.data["postText"].toString()))
+                callback.getPostList(postList)
+            }
+        }
+        return postList
+    }
+
+
 }

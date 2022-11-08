@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
+import com.mustafaunlu.movieapp.models.post.Post
+import com.mustafaunlu.movieapp.repo.app.GetPostList
 import com.mustafaunlu.movieapp.repo.app.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
@@ -49,11 +51,10 @@ class MovieViewModel @Inject constructor(
                      println(postSize)
                  }
 
-
-
-
-
-
-
     }
+    fun getPost(callback : GetPostList): ArrayList<Post> {
+        return homeRepository.getPost(callback)
+    }
+
+
 }
