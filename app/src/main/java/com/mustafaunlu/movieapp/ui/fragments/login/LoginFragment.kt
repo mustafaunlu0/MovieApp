@@ -29,11 +29,14 @@ class LoginFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         if(viewModel.isCurrentUser(requireContext())){
             val intent=Intent(context, MainActivity::class.java);
             startActivity(intent)
             requireActivity().finish();
         }
+
+
 
 
 

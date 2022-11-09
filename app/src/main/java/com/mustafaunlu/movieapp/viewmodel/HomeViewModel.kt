@@ -31,7 +31,6 @@ class HomeViewModel @Inject constructor(private val repository: RetrofitReposito
         return genreList
     }
 
-
     fun loadRecentMovieData(page : String){
         repository.getRecentMovies(page,recentMovieList)
     }

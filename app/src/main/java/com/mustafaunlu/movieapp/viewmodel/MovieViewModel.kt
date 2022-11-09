@@ -1,18 +1,14 @@
 package com.mustafaunlu.movieapp.viewmodel
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
 import com.mustafaunlu.movieapp.models.post.Post
 import com.mustafaunlu.movieapp.repo.app.GetPostList
 import com.mustafaunlu.movieapp.repo.app.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
-import java.math.MathContext.UNLIMITED
-import java.nio.channels.Channel
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,7 +18,15 @@ class MovieViewModel @Inject constructor(
 ) : ViewModel(){
 
     var postSize=0
+    private var username : MutableLiveData<String> = MutableLiveData()
+    private var profileImage : MutableLiveData<String> = MutableLiveData()
 
+    fun getUsername(): MutableLiveData<String> {
+        return username
+    }
+    fun getProfileImage(): MutableLiveData<String> {
+        return profileImage
+    }
 
     fun likeMovie(
         userMail: String,
@@ -44,6 +48,10 @@ class MovieViewModel @Inject constructor(
         return homeRepository.currentUser()
     }
 
+    fun getUserPhoto(userMail: String){
+        homeRepository.getUserPhoto(userMail,profileImage)
+    }
+
      fun getLikedMovie(movieName: String, callback: FirebaseCallback){
                  db.collection("Liked-Movie").document(getCurrentUserEmail()).collection(movieName).get().addOnSuccessListener {
                      postSize = it.size()
@@ -54,6 +62,10 @@ class MovieViewModel @Inject constructor(
     }
     fun getPost(callback : GetPostList): ArrayList<Post> {
         return homeRepository.getPost(callback)
+    }
+
+    fun findUserName(userMail: String){
+        homeRepository.findUserName(userMail,username)
     }
 
 

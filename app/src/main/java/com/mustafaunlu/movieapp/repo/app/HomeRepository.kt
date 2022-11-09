@@ -1,6 +1,7 @@
 package com.mustafaunlu.movieapp.repo.app
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.mustafaunlu.movieapp.models.post.Post
@@ -61,7 +62,20 @@ class HomeRepository @Inject constructor(
         }
 
 
-        //firestore.collection("Posts").document(userMail).collection(movName).add(postMap).addOnSuccessListener
+
+    }
+
+    fun findUserName(userMail: String,username: MutableLiveData<String>){
+
+        firestore.collection("User").get().addOnSuccessListener {
+
+            for (item in it){
+                if(item.data["email"].toString()==userMail){
+                    username.postValue(item.data["username"].toString())
+                }
+            }
+        }
+
 
     }
     fun getPost(callback : GetPostList): ArrayList<Post> {
@@ -73,6 +87,16 @@ class HomeRepository @Inject constructor(
             }
         }
         return postList
+    }
+
+    fun getUserPhoto(userMail: String, profileImage: MutableLiveData<String>){
+        firestore.collection("User").get().addOnSuccessListener {
+            for (item in it){
+                if(item.data["email"].toString()==userMail){
+                    profileImage.postValue(item.data["downloadUri"].toString())
+                }
+            }
+        }
     }
 
 

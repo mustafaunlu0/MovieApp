@@ -21,6 +21,8 @@ class FeedFragment : Fragment(), GetPostList {
 
     private var binding : FragmentFeedBinding? = null
     private val viewModel : MovieViewModel by viewModels()
+    private var adapter=PostAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,7 +44,16 @@ class FeedFragment : Fragment(), GetPostList {
             findNavController().navigate(R.id.action_feedFragment_to_postFragment2)
         }
 
-        viewModel.getPost(this)
+
+
+        viewModel.getUserPhoto(viewModel.getCurrentUserEmail())
+        viewModel.getProfileImage().observe(viewLifecycleOwner){ profileImage ->
+            adapter.setProfilePhoto(profileImage)
+            viewModel.getPost(this)
+        }
+
+
+        viewModel.getCurrentUserEmail()
 
         //Tasarımı düzeltmesi kaldı
 
@@ -51,7 +62,6 @@ class FeedFragment : Fragment(), GetPostList {
 
     override fun getPostList(postList: ArrayList<Post>) {
 
-        var adapter=PostAdapter()
         adapter.setList(postList)
 
         for(item in postList){

@@ -7,21 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.core.view.get
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.room.RoomDatabase
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentPostBinding
-import com.mustafaunlu.movieapp.db.room.GenreData
 import com.mustafaunlu.movieapp.viewmodel.GenreViewModel
 import com.mustafaunlu.movieapp.viewmodel.HomeViewModel
 import com.mustafaunlu.movieapp.viewmodel.MovieViewModel
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
-import javax.inject.Inject
 import kotlin.random.Random
 
 @AndroidEntryPoint
@@ -53,21 +48,36 @@ class PostFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //filmleri çektik spinner a yerleştirmesi kaldı
 
         movieCategory.add("Select Category")
 
         for( item in genreViewModel.readAllGenres()){
             movieCategory.add(item.genre_name_en)
         }
+        //Problem
+        //Kullanıcı adını alma problemi yaşıyoruz çekerken zorlanıyor
+        movieViewModel.findUserName(movieViewModel.getCurrentUserEmail())
+        movieViewModel.getUsername().observe(viewLifecycleOwner){
+            println("burada ne var: $it")
 
+
+        }
 
         binding?.postButton?.setOnClickListener {
             if(category !="Select Category"){
-                println("Category: $category")
-                movieViewModel.postMovie(movieViewModel.getCurrentUserEmail(),binding!!.movNameEditText.text.toString(),category,binding!!.postEditText.text.toString(),requireContext())
 
-                findNavController().navigate(R.id.action_postFragment2_to_feedFragment)
+                //movieViewModel.findUserName(movieViewModel.getCurrentUserEmail())
+                println("okey")
+                movieViewModel.getUsername().observe(viewLifecycleOwner){
+                    println("burada : $it")
+                    movieViewModel.postMovie(it,binding!!.movNameEditText.text.toString(),category,binding!!.postEditText.text.toString(),requireContext())
+                    findNavController().navigate(R.id.action_postFragment2_to_feedFragment)
+
+                }
+                println("okey")
+
+
+
             }else{
                 FancyToast.makeText(requireContext(),"Do not select category",
                     FancyToast.LENGTH_LONG,
@@ -87,7 +97,7 @@ class PostFragment : Fragment(), AdapterView.OnItemSelectedListener {
         spinner.adapter=arrayAdapter
 
 
-
+        fetchMovies()
 
 
     }
@@ -103,6 +113,19 @@ class PostFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
 
+    }
+    private fun fetchMovies() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val random = Random.nextInt(0, 5)
+            val job1: Deferred<Unit> = async {
+                movieViewModel.findUserName(movieViewModel.getCurrentUserEmail())
+            }
+
+
+            job1.await()
+
+
+        }
     }
 
 

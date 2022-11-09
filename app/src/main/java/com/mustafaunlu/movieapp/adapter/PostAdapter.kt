@@ -1,5 +1,6 @@
 package com.mustafaunlu.movieapp.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +16,13 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     //veriyi çek
     var postList : List<Post>? = null
-
+    public lateinit var imageUri : String
     fun setList(postList: List<Post>){
         this.postList=postList
+
+    }
+    fun setProfilePhoto(imageUri : String){
+        this.imageUri = imageUri
     }
 
     class PostViewHolder(view : View) : RecyclerView.ViewHolder(view){
@@ -28,12 +33,14 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
         private val category=view.findViewById<TextView>(R.id.categoryTextView)
         private val post=view.findViewById<TextView>(R.id.postedTextView)
 
-        fun bind(data : Post){
+        fun bind(data : Post,imageUri: String){
 
         username.text=data.username
         movie.text=data.movie
         category.text=data.category
         post.text=data.post
+            println("imageUri: "+imageUri)
+        Glide.with(profileImage).load(imageUri).into(profileImage)
          // şu an için image yok -> Glide.with(profileImage).load(data.imageUrl).into(profileImage)
 
 
@@ -47,7 +54,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        holder.bind(postList!![position])
+        holder.bind(postList!![position],imageUri)
         holder.itemView.setOnClickListener {
             //henüz bir şey yok
         }

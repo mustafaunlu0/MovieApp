@@ -74,13 +74,13 @@ class HomeFragment : Fragment(), SendDataListener, FirebaseCallback{
         viewModel.getObserverRecentMovie().observe(viewLifecycleOwner
         ) { t ->
             if (t != null) {
-                println("position- Observer: "+sessionManager.getPosition())
+                //println("position- Observer: "+sessionManager.getPosition())
                 //gelen veriyi filtreleme ya da database e çekip onun üzerinde filtreleme ya da adapter üzerinde filtreleme
                 movieAdapter.setList(t.results,genreList!!,this)
 
 
             } else {
-                println("t boş geldi")
+                //println("t boş geldi")
             }
         }
         viewModel.getObserverPopularMovie().observe(viewLifecycleOwner){
@@ -92,7 +92,7 @@ class HomeFragment : Fragment(), SendDataListener, FirebaseCallback{
 
                 placePopularMovie(randomMovie)
             }else{
-                println("t null geldi")
+                //println("t null geldi")
             }
         }
 
