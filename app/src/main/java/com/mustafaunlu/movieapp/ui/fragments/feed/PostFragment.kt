@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.databinding.FragmentPostBinding
@@ -56,25 +57,20 @@ class PostFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
         //Problem
         //Kullanıcı adını alma problemi yaşıyoruz çekerken zorlanıyor
+        println("email ne:"+movieViewModel.getCurrentUserEmail())
         movieViewModel.findUserName(movieViewModel.getCurrentUserEmail())
-        movieViewModel.getUsername().observe(viewLifecycleOwner){
-            println("burada ne var: $it")
 
-
-        }
 
         binding?.postButton?.setOnClickListener {
             if(category !="Select Category"){
 
-                //movieViewModel.findUserName(movieViewModel.getCurrentUserEmail())
                 println("okey")
-                movieViewModel.getUsername().observe(viewLifecycleOwner){
+                movieViewModel.getUsername().observe(viewLifecycleOwner, Observer {
                     println("burada : $it")
                     movieViewModel.postMovie(it,binding!!.movNameEditText.text.toString(),category,binding!!.postEditText.text.toString(),requireContext())
                     findNavController().navigate(R.id.action_postFragment2_to_feedFragment)
-
-                }
-                println("okey")
+                })
+                println("okey-1")
 
 
 

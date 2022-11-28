@@ -6,7 +6,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.mustafaunlu.movieapp.models.post.Post
 import com.shashank.sony.fancytoastlib.FancyToast
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class HomeRepository @Inject constructor(
     private val firestore: FirebaseFirestore,
@@ -15,6 +17,7 @@ class HomeRepository @Inject constructor(
     private var postList = ArrayList<Post>()
 
     fun currentUser() : String{
+        println("current Email: "+auth.currentUser!!.email.toString())
         return auth.currentUser!!.email.toString()
     }
 
@@ -66,11 +69,12 @@ class HomeRepository @Inject constructor(
     }
 
     fun findUserName(userMail: String,username: MutableLiveData<String>){
-
+        println("Home Repository-> findUserName()")
+        println("UserMail=$userMail")
         firestore.collection("User").get().addOnSuccessListener {
-
-            for (item in it){
-                if(item.data["email"].toString()==userMail){
+            for (item in it) {
+                if (item.data["email"].toString().lowercase()==userMail){
+                    println("username: "+item.data["username"].toString())
                     username.postValue(item.data["username"].toString())
                 }
             }
@@ -92,8 +96,9 @@ class HomeRepository @Inject constructor(
     fun getUserPhoto(userMail: String, profileImage: MutableLiveData<String>){
         firestore.collection("User").get().addOnSuccessListener {
             for (item in it){
-                if(item.data["email"].toString()==userMail){
+                if(item.data["email"].toString().lowercase()==userMail){
                     profileImage.postValue(item.data["downloadUri"].toString())
+
                 }
             }
         }

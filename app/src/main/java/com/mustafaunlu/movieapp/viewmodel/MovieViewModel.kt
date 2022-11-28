@@ -38,8 +38,8 @@ class MovieViewModel @Inject constructor(
         homeRepository.likeMovie(userMail,imageUrl, title,overview ,date,context)
     }
 
-    fun postMovie(userMail: String,movName : String, category : String,postText : String,context: Context){
-        homeRepository.postMovie(userMail, movName,category,postText, context)
+    fun postMovie(username: String,movName : String, category : String,postText : String,context: Context){
+        homeRepository.postMovie(username, movName,category,postText, context)
     }
 
 
@@ -65,6 +65,8 @@ class MovieViewModel @Inject constructor(
     }
 
     fun findUserName(userMail: String){
+        println("MovieViewModel->findUserName()")
+        println("model-> $userMail")
         homeRepository.findUserName(userMail,username)
     }
 

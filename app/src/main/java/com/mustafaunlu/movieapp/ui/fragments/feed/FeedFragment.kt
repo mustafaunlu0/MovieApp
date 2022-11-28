@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+
+
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.adapter.PostAdapter
 import com.mustafaunlu.movieapp.databinding.FragmentFeedBinding
@@ -46,30 +48,44 @@ class FeedFragment : Fragment(), GetPostList {
 
 
 
+        viewModel.getPost(this)
+
         viewModel.getUserPhoto(viewModel.getCurrentUserEmail())
-        viewModel.getProfileImage().observe(viewLifecycleOwner){ profileImage ->
-            adapter.setProfilePhoto(profileImage)
-            viewModel.getPost(this)
-        }
 
 
-        viewModel.getCurrentUserEmail()
 
-        //Tasarımı düzeltmesi kaldı
+
+
+
+
+
+
+
+
+
+       //viewModel.getCurrentUserEmail()
+
+       //Tasarımı düzeltmesi kaldı
+
 
 
     }
 
     override fun getPostList(postList: ArrayList<Post>) {
 
+
+        println("buraya geldi")
         adapter.setList(postList)
 
-        for(item in postList){
-            println("Film: "+item.movie)
-        }
 
         binding!!.feedRecyclerView.adapter=adapter
-        binding!!.feedRecyclerView.layoutManager=LinearLayoutManager(context)
+        binding!!.feedRecyclerView.layoutManager= LinearLayoutManager(context)
+
+        println("buradan çıktı")
+
+
+
+
 
     }
 
