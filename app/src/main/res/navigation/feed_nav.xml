@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_feedFragment_to_postFragment2"
             app:destination="@id/postFragment2" />
+        <action
+            android:id="@+id/action_feedFragment_to_commentFragment"
+            app:destination="@id/commentFragment" />
     </fragment>
     <fragment
         android:id="@+id/postFragment2"
@@ -21,6 +24,14 @@
         tools:layout="@layout/fragment_post" >
         <action
             android:id="@+id/action_postFragment2_to_feedFragment"
+            app:destination="@id/feedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.mustafaunlu.movieapp.ui.fragments.feed.CommentFragment"
+        android:label="CommentFragment" >
+        <action
+            android:id="@+id/action_commentFragment_to_feedFragment"
             app:destination="@id/feedFragment" />
     </fragment>
 </navigation>

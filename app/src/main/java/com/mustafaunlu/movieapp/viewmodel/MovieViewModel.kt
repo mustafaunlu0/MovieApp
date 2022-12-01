@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
+import com.mustafaunlu.movieapp.models.post.Comment
 import com.mustafaunlu.movieapp.models.post.Post
 import com.mustafaunlu.movieapp.repo.app.GetPostList
 import com.mustafaunlu.movieapp.repo.app.HomeRepository
@@ -19,14 +20,13 @@ class MovieViewModel @Inject constructor(
 
     var postSize=0
     private var username : MutableLiveData<String> = MutableLiveData()
-    private var profileImage : MutableLiveData<String> = MutableLiveData()
+    var profileImage : MutableLiveData<String> = MutableLiveData()
+    var commentList : MutableLiveData<ArrayList<Comment>> = MutableLiveData()
 
     fun getUsername(): MutableLiveData<String> {
         return username
     }
-    fun getProfileImage(): MutableLiveData<String> {
-        return profileImage
-    }
+
 
     fun likeMovie(
         userMail: String,
@@ -68,6 +68,15 @@ class MovieViewModel @Inject constructor(
         println("MovieViewModel->findUserName()")
         println("model-> $userMail")
         homeRepository.findUserName(userMail,username)
+    }
+    fun getUserPhotoWithUsername(username: String){
+        homeRepository.getUserPhotoWithUsername(username,profileImage)
+    }
+    fun getComments(postId : String){
+        homeRepository.getComments(postId,commentList)
+    }
+    fun addComment(postId : String,username: String,comment : String,context: Context){
+        homeRepository.addComment(postId,username,comment,context)
     }
 
 

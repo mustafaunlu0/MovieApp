@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
@@ -56,16 +58,12 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
         post.text=data.post
             println("collection üstü")
             firestore.collection("User").get().addOnSuccessListener {
-                println("varan 1")
                 for (item in it){
-                    println("varan2")
                     if(item.data["username"].toString()==data.username){
-                        println("burasıcollection")
                         Glide.with(profileImage).load(item.data["downloadUri"].toString()).into(profileImage)
                     }
                 }
             }
-            println("collection altı")
 
         }
     }
@@ -79,8 +77,10 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
         holder.bind(postList!![position])
         holder.itemView.setOnClickListener {
-            //henüz bir şey yok
+            val bundle = bundleOf("post" to postList!![position])
+            holder.itemView.findNavController().navigate(R.id.action_feedFragment_to_commentFragment,bundle)
         }
+
     }
 
     override fun getItemCount(): Int {

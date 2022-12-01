@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/post_background"
+    android:background="@drawable/post_backgorund_dark"
     android:layout_margin="10dp"
     android:padding="10dp"
     >
@@ -18,7 +18,7 @@
         android:layout_margin="10dp"
         >
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/profileImageView"
+            android:id="@+id/commentDetailProfileImageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@color/teal_200"
@@ -40,13 +40,13 @@
         android:layout_marginTop="15dp"
         >
         <TextView
-            android:id="@+id/usernameTextView"
+            android:id="@+id/postedUsernameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Jack Ambersen"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             />
 
     </LinearLayout>
@@ -70,7 +70,7 @@
             >
 
             <TextView
-                android:id="@+id/postedTextView"
+                android:id="@+id/postedCommentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/comment_background"

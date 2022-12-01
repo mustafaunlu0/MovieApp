@@ -74,14 +74,14 @@ class FeedFragment : Fragment(), GetPostList {
     override fun getPostList(postList: ArrayList<Post>) {
 
 
-        println("buraya geldi")
+
         adapter.setList(postList)
 
 
         binding!!.feedRecyclerView.adapter=adapter
         binding!!.feedRecyclerView.layoutManager= LinearLayoutManager(context)
 
-        println("buradan çıktı")
+
 
 
 
