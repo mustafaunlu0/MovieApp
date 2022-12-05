@@ -8,6 +8,7 @@ import com.mustafaunlu.movieapp.ui.fragments.home.HomeFragment
 import com.mustafaunlu.movieapp.ui.fragments.profile.ProfileFragment
 import com.mustafaunlu.movieapp.ui.fragments.feed.FlowFragment
 import com.mustafaunlu.movieapp.ui.fragments.home.MovieFragment
+import com.mustafaunlu.movieapp.ui.fragments.profile.UserProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private  var movieFragment: MovieFragment = MovieFragment()
     private  var flowFragment: FlowFragment = FlowFragment()
-    private var profileFragment: ProfileFragment = ProfileFragment()
+    private var userProfile: UserProfileFragment = UserProfileFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -31,13 +32,6 @@ class MainActivity : AppCompatActivity() {
         if(binding != null){
             setUpTabBar()
         }
-
-
-
-
-
-
-
 
     }
 
@@ -53,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.flow -> supportFragmentManager.beginTransaction().replace(R.id.fragmentView,flowFragment).commit()
 
-                R.id.profile -> supportFragmentManager.beginTransaction().replace(R.id.fragmentView,profileFragment).commit()
+                R.id.userProfile -> supportFragmentManager.beginTransaction().replace(R.id.fragmentView,userProfile).commit()
 
             }
         }

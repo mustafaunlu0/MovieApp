@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -56,7 +57,6 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
         movie.text=data.movie
         category.text=data.category
         post.text=data.post
-            println("collection üstü")
             firestore.collection("User").get().addOnSuccessListener {
                 for (item in it){
                     if(item.data["username"].toString()==data.username){
@@ -77,8 +77,22 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
         holder.bind(postList!![position])
         holder.itemView.setOnClickListener {
+
             val bundle = bundleOf("post" to postList!![position])
-            holder.itemView.findNavController().navigate(R.id.action_feedFragment_to_commentFragment,bundle)
+
+            if(holder.itemView.findNavController().currentDestination?.id==R.id.feedFragment){
+                //Feed Fragment
+                println("feed")
+                holder.itemView.findNavController().navigate(R.id.action_feedFragment_to_commentFragment,bundle)
+            }
+
+            else{
+                println("profile")
+                holder.itemView.findNavController().navigate(R.id.action_profileFragment_to_commentFragment2,bundle)
+
+            }
+
+
         }
 
     }

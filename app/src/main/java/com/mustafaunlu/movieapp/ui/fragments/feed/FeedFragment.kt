@@ -54,21 +54,6 @@ class FeedFragment : Fragment(), GetPostList {
 
 
 
-
-
-
-
-
-
-
-
-
-       //viewModel.getCurrentUserEmail()
-
-       //Tasarımı düzeltmesi kaldı
-
-
-
     }
 
     override fun getPostList(postList: ArrayList<Post>) {

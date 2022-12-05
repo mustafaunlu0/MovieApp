@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable-v24/header_background.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable-v24/ic_arrow_down.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable-v24/ic_category.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1825" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable-v24/ic_notifications.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable-v24/ic_search.xml" value="0.1" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable-v24/tags_background.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/background_input.xml" value="0.1045" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/background_search.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/drawable/button_background.xml" value="0.15" />
@@ -42,8 +44,9 @@
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_movie.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_movie_detail.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_post.xml" value="0.32222222222222224" />
-        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_profile.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_user_profile.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/item_container_movie.xml" value="0.22" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/menu/menu.xml" value="0.21851851851851853" />
       </map>

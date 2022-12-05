@@ -5,6 +5,6 @@
         android:icon="@drawable/ic_home" app:cnb_iconColor="#30A2DA" />
     <item android:id="@+id/flow" android:title="Feed"
         android:icon="@drawable/ic_feedd" app:cnb_iconColor="#D54F25" />
-    <item android:id="@+id/profile" android:title="Profile"
+    <item android:id="@+id/userProfile" android:title="UserProfile"
         android:icon="@drawable/ic_account" app:cnb_iconColor="#75BF27" />
 </menu>

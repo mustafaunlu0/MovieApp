@@ -22,10 +22,12 @@ class MovieViewModel @Inject constructor(
     private var username : MutableLiveData<String> = MutableLiveData()
     var profileImage : MutableLiveData<String> = MutableLiveData()
     var commentList : MutableLiveData<ArrayList<Comment>> = MutableLiveData()
+    var selectedPostList : MutableLiveData<ArrayList<Post>> = MutableLiveData()
 
     fun getUsername(): MutableLiveData<String> {
         return username
     }
+
 
 
     fun likeMovie(
@@ -63,6 +65,10 @@ class MovieViewModel @Inject constructor(
     fun getPost(callback : GetPostList): ArrayList<Post> {
         return homeRepository.getPost(callback)
     }
+    fun getSelectedPost(username: String){
+        homeRepository.getSelectedPost(username,selectedPostList)
+    }
+
 
     fun findUserName(userMail: String){
         println("MovieViewModel->findUserName()")
@@ -78,6 +84,8 @@ class MovieViewModel @Inject constructor(
     fun addComment(postId : String,username: String,comment : String,context: Context){
         homeRepository.addComment(postId,username,comment,context)
     }
+
+
 
 
 }

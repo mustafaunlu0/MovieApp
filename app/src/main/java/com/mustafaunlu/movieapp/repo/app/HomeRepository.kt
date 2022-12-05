@@ -105,6 +105,19 @@ class HomeRepository @Inject constructor(
         return postList
     }
 
+    fun getSelectedPost(username: String, selectedPost : MutableLiveData<ArrayList<Post>>){
+        var selectedPostArrayList : ArrayList<Post> = arrayListOf()
+        firestore.collection("Posts").orderBy("date", Query.Direction.DESCENDING).get().addOnSuccessListener {
+            for (item in it){
+                if(item.data["username"].toString()==username){
+                    selectedPostArrayList.add(Post(item.data["id"].toString(),item.data["username"].toString(),item.data["movName"].toString(),item.data["category"].toString(),item.data["postText"].toString()))
+                }
+            }
+            selectedPost.postValue(selectedPostArrayList)
+        }
+
+    }
+
     fun getUserPhoto(userMail: String, profileImage: MutableLiveData<String>){
         firestore.collection("User").get().addOnSuccessListener {
             for (item in it){

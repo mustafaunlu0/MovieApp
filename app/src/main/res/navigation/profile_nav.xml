@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile_nav"
+    app:startDestination="@id/profileFragment">
+
+    <fragment
+        android:id="@+id/commentFragment2"
+        android:name="com.mustafaunlu.movieapp.ui.fragments.feed.CommentFragment"
+        android:label="CommentFragment" >
+        <action
+            android:id="@+id/action_commentFragment2_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.mustafaunlu.movieapp.ui.fragments.profile.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_commentFragment2"
+            app:destination="@id/commentFragment2" />
+    </fragment>
+</navigation>
