@@ -84,6 +84,9 @@ class MovieViewModel @Inject constructor(
     fun addComment(postId : String,username: String,comment : String,context: Context){
         homeRepository.addComment(postId,username,comment,context)
     }
+    fun logout(){
+        homeRepository.logout()
+    }
 
 
 

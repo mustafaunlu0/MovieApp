@@ -63,9 +63,13 @@ class CommentFragment : Fragment() {
 
         binding!!.commentSendButton.setOnClickListener{
             if(binding!!.commentEditText.text.toString().isNotEmpty()){
-                binding!!.commentRecyclerView.adapter!!.notifyDataSetChanged()
-                viewModel.addComment(post.id,post.username,binding!!.commentEditText.text.toString(),requireContext())
-                binding!!.commentEditText.setText("")
+                viewModel.findUserName(viewModel.getCurrentUserEmail())
+                viewModel.getUsername().observe(viewLifecycleOwner){
+                    binding!!.commentRecyclerView.adapter!!.notifyDataSetChanged()
+                    viewModel.addComment(post.id,it,binding!!.commentEditText.text.toString(),requireContext())
+                    binding!!.commentEditText.setText("")
+                }
+
             }
         }
 

@@ -1,5 +1,6 @@
 package com.mustafaunlu.movieapp.ui.fragments.profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,14 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.adapter.PostAdapter
 import com.mustafaunlu.movieapp.adapter.SendDataListener
 import com.mustafaunlu.movieapp.databinding.FragmentProfileBinding
 import com.mustafaunlu.movieapp.models.api.Result
+import com.mustafaunlu.movieapp.ui.activities.LoginActivity
+import com.mustafaunlu.movieapp.ui.activities.MainActivity
 import com.mustafaunlu.movieapp.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,6 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileFragment : Fragment(){
 
     val viewModel : MovieViewModel by viewModels()
+
     private var binding : FragmentProfileBinding? = null
     private var adapter=PostAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,11 +61,20 @@ class ProfileFragment : Fragment(){
             binding!!.aboutTextView.text=viewModel.getCurrentUserEmail()
             viewModel.getSelectedPost(username)
         }
+
+        //post
         viewModel.selectedPostList.observe(viewLifecycleOwner){ postList->
             println("selectedPostList")
             adapter.setList(postList)
             binding!!.profileRecyclerView.adapter=adapter
             binding!!.profileRecyclerView.layoutManager=LinearLayoutManager(context)
+        }
+
+        //logout
+        binding!!.logoutFab.setOnClickListener {
+            viewModel.logout()
+            var intent=Intent(activity,LoginActivity::class.java)
+            startActivity(intent)
         }
 
 

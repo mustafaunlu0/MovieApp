@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
         <View
             android:id="@+id/viewHeader"
             android:layout_width="match_parent"
@@ -25,6 +27,7 @@
             app:layout_constraintBottom_toBottomOf="@id/viewHeader"
             app:layout_constraintTop_toBottomOf="@id/viewHeader"
             >
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -119,5 +122,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/latestPostTextView"
             app:layout_constraintVertical_bias="1.0" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/logoutFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logout"
+            app:tint="@color/white"
+            android:backgroundTint="#039BE5"
+            app:layout_anchorGravity="top|end|right"
+            app:maxImageSize="28dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="15dp"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

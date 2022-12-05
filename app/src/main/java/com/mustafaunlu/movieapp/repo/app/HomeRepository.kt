@@ -25,7 +25,11 @@ class HomeRepository @Inject constructor(
     private var postList = ArrayList<Post>()
 
     fun currentUser() : String{
-        return auth.currentUser!!.email.toString()
+        return auth.currentUser?.email.toString()
+    }
+
+    fun logout(){
+        auth.signOut()
     }
 
 
