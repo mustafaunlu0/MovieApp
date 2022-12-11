@@ -21,7 +21,6 @@ class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() 
 
     fun setList(commentList : List<Comment>){
         this.commentList=commentList
-        notifyDataSetChanged()
     }
 
     class CommentViewHolder(view : View) : RecyclerView.ViewHolder(view){

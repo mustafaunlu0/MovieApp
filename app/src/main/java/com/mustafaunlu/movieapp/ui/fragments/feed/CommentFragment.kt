@@ -30,7 +30,7 @@ class CommentFragment : Fragment() {
     private var commentAdapter = CommentAdapter()
 
 
-
+    //2 tane boş yorum geliyor -> Kontrol
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -61,31 +61,42 @@ class CommentFragment : Fragment() {
         binding!!.commentPostedTextView.text=post.post
 
 
+        listComment(post)
+
         binding!!.commentSendButton.setOnClickListener{
             if(binding!!.commentEditText.text.toString().isNotEmpty()){
+                //commentAdapter.notifyDataSetChanged()
                 viewModel.findUserName(viewModel.getCurrentUserEmail())
                 viewModel.getUsername().observe(viewLifecycleOwner){
-                    binding!!.commentRecyclerView.adapter!!.notifyDataSetChanged()
                     viewModel.addComment(post.id,it,binding!!.commentEditText.text.toString(),requireContext())
+                    listComment(post)
                     binding!!.commentEditText.setText("")
                 }
 
             }
         }
 
+
+
+
+
+
+
+    }
+
+    fun listComment( post : Post){
         viewModel.getComments(post.id)
         //CommentList boş geliyor!!
         viewModel.commentList.observe(viewLifecycleOwner){
+
             println("boyut: "+it.size)
-            commentAdapter.setList(it)
-            binding!!.commentRecyclerView.adapter=commentAdapter
+            commentAdapter.notifyItemInserted(it.size-1)
             binding!!.commentRecyclerView.layoutManager=LinearLayoutManager(requireContext())
+            commentAdapter= CommentAdapter()
+            commentAdapter.setList(it)
+
+            binding!!.commentRecyclerView.adapter=commentAdapter
         }
-
-
-
-
-
     }
 
 
