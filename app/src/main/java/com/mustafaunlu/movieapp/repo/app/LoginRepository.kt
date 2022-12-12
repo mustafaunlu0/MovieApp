@@ -1,13 +1,14 @@
 package com.mustafaunlu.movieapp.repo.app
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
-import android.widget.Toast
+import android.view.View
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.ui.activities.MainActivity
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.scopes.FragmentScoped
@@ -26,12 +27,14 @@ class LoginRepository @Inject constructor(
         return currentUser != null
     }
 
-    fun signIn(email : String, password :String, context :Context ){
+    fun signIn(email : String, password :String, context :Context,view :View ){
             auth.signInWithEmailAndPassword(email,password).addOnCompleteListener {  task ->
                 if(task.isSuccessful){
                     FancyToast.makeText(context,"Login..",
                         FancyToast.LENGTH_LONG,
                         FancyToast.SUCCESS,false).show();
+                        findNavController(view).navigate(R.id.action_loginFragment_to_mainActivity)
+
 
                 }
 

@@ -57,9 +57,7 @@ class LoginFragment : Fragment() {
             val email=binding!!.loginEmailEditText.text.toString()
             val password=binding!!.loginPasswordEditText.text.toString()
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                viewModel.signIn(email, password, requireContext())
-                    findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
-
+                    viewModel.signIn(email, password, requireContext(),view)
             }else{
                 FancyToast.makeText(requireContext(),"Fill the blanks !",FancyToast.LENGTH_LONG,FancyToast.CONFUSING,false).show();
 
