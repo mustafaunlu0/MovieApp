@@ -56,7 +56,7 @@ class DetailFragment : Fragment(), FirebaseCallback {
             }
 
             binding!!.likeFab.setOnClickListener {
-                viewModel.likeMovie(viewModel.getCurrentUserEmail(),args.imageUrl,args.title,args.overview,args.date,requireContext())
+                viewModel.likeMovie(args.imageUrl,args.title,args.overview,args.date,requireContext())
                 binding!!.likeFab.isEnabled=false
                 findNavController().navigate(R.id.action_detailFragment_to_homeFragment2)
 

@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.mustafaunlu.movieapp.R
 import com.mustafaunlu.movieapp.adapter.MovieAdapter
 import com.mustafaunlu.movieapp.adapter.SendDataListener
 import com.mustafaunlu.movieapp.databinding.FragmentHomeBinding
@@ -120,9 +121,14 @@ class HomeFragment : Fragment(), SendDataListener, FirebaseCallback{
 
 
         binding!!.favoriteImageView.setOnClickListener{
-            movieViewModel.likeMovie(movieViewModel.getCurrentUserEmail(),randomMovie.poster_path,randomMovie.title,randomMovie.overview,randomMovie.release_date,requireContext())
+            println("link: "+randomMovie.poster_path)
+            movieViewModel.likeMovie(randomMovie.poster_path,randomMovie.title,randomMovie.overview,randomMovie.release_date,requireContext())
             binding!!.favoriteImageView.isVisible=false
 
+        }
+
+        binding!!.likeImageView.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment2_to_likeFragment)
         }
 
     }

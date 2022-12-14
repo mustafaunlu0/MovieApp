@@ -40,14 +40,18 @@
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_flow.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_intro.xml" value="0.25" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_latest_post.xml" value="0.32222222222222224" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_like.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_login.xml" value="0.22" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_movie.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_movie_detail.xml" value="0.1" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_post.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_profile.xml" value="0.39545454545454545" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_scroling_profile.xml" value="0.30972222222222223" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/fragment_user_profile.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/item_container_movie.xml" value="0.22" />
+        <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/layout/like_row.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/mft3/Desktop/Movie/MovieApp/app/src/main/res/menu/menu.xml" value="0.21851851851851853" />
       </map>
     </option>

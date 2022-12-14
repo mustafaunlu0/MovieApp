@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.mustafaunlu.movieapp.models.post.Comment
+import com.mustafaunlu.movieapp.models.post.LikedMovie
 import com.mustafaunlu.movieapp.models.post.Post
 import com.mustafaunlu.movieapp.repo.app.GetPostList
 import com.mustafaunlu.movieapp.repo.app.HomeRepository
@@ -23,21 +24,24 @@ class MovieViewModel @Inject constructor(
     var profileImage : MutableLiveData<String> = MutableLiveData()
     var commentList : MutableLiveData<ArrayList<Comment>> = MutableLiveData()
     var selectedPostList : MutableLiveData<ArrayList<Post>> = MutableLiveData()
+    var likedMovieList : MutableLiveData<ArrayList<LikedMovie>> = MutableLiveData()
 
     fun getUsername(): MutableLiveData<String> {
         return username
     }
 
+    fun getUserLikedMovie(){
+        homeRepository.getUserLikedMovie(likedMovieList)
+    }
 
 
     fun likeMovie(
-        userMail: String,
         imageUrl: String,
         title: String,
-        overview: String,
+        overview:String,
         date: String,
         context: Context){
-        homeRepository.likeMovie(userMail,imageUrl, title,overview ,date,context)
+        homeRepository.likeMovie(title,overview,date,imageUrl,context)
     }
 
     fun postMovie(username: String,movName : String, category : String,postText : String,context: Context){
@@ -55,11 +59,7 @@ class MovieViewModel @Inject constructor(
     }
 
      fun getLikedMovie(movieName: String, callback: FirebaseCallback){
-                 db.collection("Liked-Movie").document(getCurrentUserEmail()).collection(movieName).get().addOnSuccessListener {
-                     postSize = it.size()
-                     callback.onResponse(it.size())
-                     println(postSize)
-                 }
+         homeRepository.getLikedMovie(movieName,callback)
 
     }
     fun getPost(callback : GetPostList): ArrayList<Post> {
@@ -68,6 +68,7 @@ class MovieViewModel @Inject constructor(
     fun getSelectedPost(username: String){
         homeRepository.getSelectedPost(username,selectedPostList)
     }
+
 
 
     fun findUserName(userMail: String){

@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.home.HomeFragment">
+    tools:context=".ui.fragments.home.HomeFragment"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    >
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageCategory"
@@ -41,7 +44,18 @@
         app:layout_constraintStart_toEndOf="@id/textCategory"
         app:layout_constraintTop_toTopOf="@id/textCategory"
         />
-
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/likeImageView"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/ic_favorite"
+        android:tint="@color/colorAccent"
+        android:contentDescription="Liked Movie"
+        app:layout_constraintEnd_toStartOf="@id/notificationImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        />
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/notificationImageView"
         android:layout_width="28dp"

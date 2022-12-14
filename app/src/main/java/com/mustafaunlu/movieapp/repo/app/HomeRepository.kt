@@ -2,6 +2,7 @@ package com.mustafaunlu.movieapp.repo.app
 
 import android.content.Context
 import android.os.Build
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
@@ -10,7 +11,9 @@ import com.google.firebase.firestore.Query
 import com.google.type.Date
 import com.google.type.DateTime
 import com.mustafaunlu.movieapp.models.post.Comment
+import com.mustafaunlu.movieapp.models.post.LikedMovie
 import com.mustafaunlu.movieapp.models.post.Post
+import com.mustafaunlu.movieapp.viewmodel.FirebaseCallback
 import com.shashank.sony.fancytoastlib.FancyToast
 import java.sql.Timestamp
 import java.time.LocalDate
@@ -34,16 +37,14 @@ class HomeRepository @Inject constructor(
 
 
 
-    fun likeMovie(userMail : String, imageUrl : String, title : String, overview : String, date : String, context : Context ){
+    fun likeMovie(title : String,overview: String,date : String,imageUri : String, context : Context ){
 
+        //For Admin
         val likeMap= hashMapOf<String,Any>()
-        likeMap["imageUrl"]=imageUrl
         likeMap["title"]=title
-        likeMap["overview"]=overview
-        likeMap["date"]=date
 
-
-        firestore.collection("Liked-Movie").document(userMail).collection(title).add(likeMap).addOnSuccessListener {
+        //For Admin
+        firestore.collection("Liked-Movie").document(currentUser()).collection(title).add(likeMap).addOnSuccessListener {
 
             FancyToast.makeText(context,"Liked!",
                 FancyToast.LENGTH_LONG,
@@ -56,8 +57,46 @@ class HomeRepository @Inject constructor(
 
         }
 
+        println("kullanici: "+currentUser())
+        //For User
+        likeMovieForUser(title,overview,date,imageUri, context)
+
+    }
+    fun likeMovieForUser(title: String,overview:String,date : String,imageUri : String,context: Context){
+        val likeMapUser = hashMapOf<String,Any>()
+        likeMapUser["usermail"]=currentUser()
+        likeMapUser["title"]=title
+        likeMapUser["overview"]=overview
+        likeMapUser["date"]=date
+        likeMapUser["imageUri"]= "https://image.tmdb.org/t/p/w342/$imageUri"
+        firestore.collection("Liked-Movie-User").add(likeMapUser).addOnSuccessListener {
+            //Added
+            Toast.makeText(context,"Liked-Movie-User added!",Toast.LENGTH_LONG).show()
+        }.addOnFailureListener { exception ->
+            FancyToast.makeText(context,exception.localizedMessage,
+                FancyToast.LENGTH_LONG,
+                FancyToast.ERROR,false).show()
+
+        }
+    }
+    //BEĞENİLEN FİLMLER COLLECTİON HALİNDE TUTULDUĞUNDAN ALAMIYORUZ
+    fun getUserLikedMovie(likedList : MutableLiveData<ArrayList<LikedMovie>>){
+        var likedArrayList= arrayListOf<LikedMovie>()
+        firestore.collection("Liked-Movie-User").get().addOnSuccessListener{
+            for(item in it){
+                likedArrayList.add(LikedMovie(item.data["title"].toString(),item.data["overview"].toString(),item.data["date"].toString(),item.data["imageUri"].toString()))
+            }
+            likedList.postValue(likedArrayList)
+
+        }
+
     }
 
+    fun getLikedMovie(movieName: String, callback: FirebaseCallback){
+        firestore.collection("Liked-Movie").document(currentUser()).collection(movieName).get().addOnSuccessListener {
+            callback.onResponse(it.size())
+        }
+    }
     fun postMovie(username: String,movName : String,category: String, postText : String,context: Context){
         val postMap= hashMapOf<String,Any>()
         val uuid=UUID.randomUUID()
