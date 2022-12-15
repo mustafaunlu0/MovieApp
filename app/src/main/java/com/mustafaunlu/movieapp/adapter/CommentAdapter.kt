@@ -29,11 +29,9 @@ class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() 
         private var comment=view.findViewById<TextView>(R.id.postedCommentTextView)
         private var firestore: FirebaseFirestore = Firebase.firestore
         private var profileImage=view.findViewById<ImageView>(R.id.commentDetailProfileImageView)
-
         fun bind(data : Comment){
             username.text=data.username
             comment.text=data.comment
-
             firestore.collection("User").get().addOnSuccessListener {
                 for (item in it){
                     if(item.data["username"].toString()==data.username){

@@ -144,6 +144,7 @@ class HomeFragment : Fragment(), SendDataListener, FirebaseCallback{
                 genres +=result.genre_name_en +", "
             }
         }
+        //Burada patlak verebiliyor kontrol et
         genres=genres.substring(0,genres.length-2)
         binding!!.recommendedGenreTextView.text=genres
         Glide.with(binding!!.recommendedImageView).load("https://image.tmdb.org/t/p/w342/"+randomMovie.poster_path).into(binding!!.recommendedImageView)
