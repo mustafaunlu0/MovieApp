@@ -11,4 +11,5 @@ MoviApp is a social media application developed for movie lovers. Thanks to this
 * Coroutine
 * Firebase
 ## Screenshoots
-<img src="https://github.com/mustafaunlu0/MovieApp/blob/master/login.gif" width="350" height="550"/> 
+<img src="https://github.com/mustafaunlu0/MovieApp/blob/master/login.gif" width="350" height="550"/>           <img src="https://github.com/mustafaunlu0/MovieApp/blob/master/kirp%20(online-video-cutter.com).gif" width="350" height="550"/> 
+
