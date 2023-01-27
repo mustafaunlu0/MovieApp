@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/post_backgorund_dark"
+
     android:layout_margin="10dp"
     android:padding="10dp"
     >
@@ -74,7 +74,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/comment_background"
-                android:padding="27sp"
+                android:paddingTop="10dp"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"
+                android:paddingBottom="10dp"
+                android:layout_marginRight="40dp"
                 android:text="@string/LoremIpsum"
                 android:textColor="@color/black"/>
 
@@ -94,19 +98,6 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_like"
-                android:layout_marginLeft="25dp"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_dislike"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="20dp"
-                />
 
         </LinearLayout>
 

@@ -26,8 +26,8 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUpFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            android:id="@+id/action_signUpFragment_to_introFragment"
+            app:destination="@id/introFragment" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"
@@ -39,4 +39,13 @@
         android:name="com.mustafaunlu.movieapp.ui.fragments.feed.PostFragment"
         android:label="fragment_post"
         tools:layout="@layout/fragment_post" />
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.mustafaunlu.movieapp.ui.fragments.intro.IntroFragment"
+        android:label="fragment_intro"
+        tools:layout="@layout/fragment_intro" >
+        <action
+            android:id="@+id/action_introFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
 </navigation>

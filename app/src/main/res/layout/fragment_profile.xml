@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ui.fragments.profile.ProfileFragment">
+    tools:context="ui.fragments.profile.ProfileFragment"
+    android:background="@color/appColor"
+    >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,9 +18,10 @@
             android:id="@+id/viewHeader"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@drawable/header_background"
+            android:background="@color/title"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="-34dp" />
+
 
         <FrameLayout
             android:id="@+id/layoutProfile"
@@ -99,11 +102,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:text="LATEST POSTS"
-            android:textColor="@color/black"
+            android:textColor="@color/title"
             android:textSize="15sp"
             android:textStyle="bold"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewHeader"
             />
@@ -125,11 +129,12 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/logoutFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:fabCustomSize="40dp"
             android:src="@drawable/ic_logout"
-            app:tint="@color/white"
-            android:backgroundTint="#039BE5"
+            app:tint="@color/appColor"
+            android:backgroundTint="@color/white"
             app:layout_anchorGravity="top|end|right"
             app:maxImageSize="28dp"
             app:layout_constraintTop_toTopOf="parent"

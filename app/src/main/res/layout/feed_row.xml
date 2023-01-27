@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/post_background"
+        android:background="@drawable/post_background"
     android:layout_margin="10dp"
     android:padding="10dp"
     >
@@ -55,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Jack Ambersen"
+
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:textColor="@color/black"
@@ -87,7 +88,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="End Game "
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                />
 
         </LinearLayout>
         <LinearLayout
@@ -109,7 +111,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Science-Fiction"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                />
 
         </LinearLayout>
         <LinearLayout
@@ -126,7 +129,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/LoremIpsum"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                />
 
         </LinearLayout>
     </LinearLayout>
@@ -134,10 +138,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/postLayout"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         >
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/bottomLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="5dp"
@@ -151,34 +156,92 @@
                 android:text="Comments"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:layout_marginRight="50dp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:id="@+id/numberOfLike"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="19sp"
-                android:textStyle="bold"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/black"/>
+                android:layout_marginTop="9dp"
+                android:layout_marginStart="18dp"
+                android:textColor="#CC3404"
+                />
 
-            <ImageView
+
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/numberOfLikeButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_like"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:lottie_url="https://assets7.lottiefiles.com/packages/lf20_vcCf0H.json"
+                app:lottie_autoPlay="true"
+                app:lottie_repeatCount="1"
+                android:layout_marginTop="-20dp"
+                android:layout_marginEnd="-18dp"
+                app:lottie_loop="false"
                 />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_dislike"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="20dp"
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/numberOfDislikeButton"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:lottie_url="https://assets7.lottiefiles.com/packages/lf20_cV9rDw.json"
+                app:lottie_autoPlay="true"
+                app:lottie_repeatCount="1"
+                app:lottie_loop="false"
+                android:layout_marginTop="-10dp"
+                android:layout_marginEnd="20dp"
                 />
+
 
         </LinearLayout>
 
     </LinearLayout>
+    <TextView
+        android:id="@+id/numberOfLike"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textColor="@color/black"
+
+        android:textStyle="bold"
+        android:text="18"
+        android:layout_marginBottom="-10dp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="NotSibling" />
+    <TextView
+        android:id="@+id/likes"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="likes"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="-10dp"
+        app:layout_constraintStart_toStartOf="@id/numberOfLike"
+        app:layout_constraintTop_toBottomOf="@id/bottomLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="NotSibling" />
+
+    <TextView
+        android:id="@+id/numberOfDisLike"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="-20"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="-10dp"
+        app:layout_constraintStart_toStartOf="@id/likes"
+        app:layout_constraintTop_toBottomOf="@id/bottomLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="NotSibling" />
+    <TextView
+        android:id="@+id/dislikes"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="dislikes"
+        android:layout_marginStart="27dp"
+        android:layout_marginBottom="-10dp"
+        app:layout_constraintStart_toStartOf="@id/numberOfDisLike"
+        app:layout_constraintTop_toBottomOf="@id/bottomLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="NotSibling" />
 </androidx.constraintlayout.widget.ConstraintLayout>

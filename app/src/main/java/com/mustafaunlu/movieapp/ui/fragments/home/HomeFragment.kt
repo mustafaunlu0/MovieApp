@@ -1,10 +1,15 @@
 package com.mustafaunlu.movieapp.ui.fragments.home
 
+import android.animation.Animator
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -21,12 +26,11 @@ import com.mustafaunlu.movieapp.databinding.FragmentHomeBinding
 import com.mustafaunlu.movieapp.db.pref.SessionManager
 import com.mustafaunlu.movieapp.db.room.GenreData
 import com.mustafaunlu.movieapp.models.api.Result
-import com.mustafaunlu.movieapp.viewmodel.FirebaseCallback
-import com.mustafaunlu.movieapp.viewmodel.GenreViewModel
-import com.mustafaunlu.movieapp.viewmodel.HomeViewModel
-import com.mustafaunlu.movieapp.viewmodel.MovieViewModel
+import com.mustafaunlu.movieapp.viewmodel.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import kotlinx.coroutines.NonCancellable.isActive
+import java.lang.Thread.sleep
 import javax.inject.Inject
 import kotlin.math.abs
 import kotlin.random.Random
@@ -38,6 +42,8 @@ class HomeFragment : Fragment(), SendDataListener, FirebaseCallback{
     private val movieViewModel : MovieViewModel by viewModels()
     private val genreViewModel : GenreViewModel by viewModels()
 
+    //Animation
+
     private var binding : FragmentHomeBinding? = null
     private lateinit var movieAdapter: MovieAdapter
 
@@ -46,6 +52,9 @@ class HomeFragment : Fragment(), SendDataListener, FirebaseCallback{
     private lateinit var movieViewPager : ViewPager2
 
     private lateinit var randomMovie : Result
+
+
+
 
     //data neden değişmiyor!
 
@@ -69,6 +78,9 @@ class HomeFragment : Fragment(), SendDataListener, FirebaseCallback{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
 
         setUpViewPager()
 
@@ -121,17 +133,48 @@ class HomeFragment : Fragment(), SendDataListener, FirebaseCallback{
 
 
         binding!!.favoriteImageView.setOnClickListener{
-            println("link: "+randomMovie.poster_path)
+
             movieViewModel.likeMovie(randomMovie.poster_path,randomMovie.title,randomMovie.overview,randomMovie.release_date,requireContext())
             binding!!.favoriteImageView.isVisible=false
 
         }
 
-        binding!!.likeImageView.setOnClickListener{
+
+        binding!!.favoriteImageView.pauseAnimation()
+        binding!!.favoriteImageView.setOnClickListener{
+            binding!!.favoriteImageView.playAnimation()
+            movieViewModel.likeMovie(randomMovie.poster_path,randomMovie.title,randomMovie.overview,randomMovie.release_date,requireContext())
+            object : CountDownTimer(3000,800){
+                override fun onTick(p0: Long) {
+                    println("sayac: "+p0)
+                    if(p0 < 2300L){
+                        binding!!.favoriteImageView.pauseAnimation()
+                        binding!!.favoriteImageView.isVisible=false
+
+                    }
+                }
+
+                override fun onFinish() {
+                    println("bitti")
+
+                }
+
+            }.start()
+
+            //binding!!.likeImageView.isVisible=false
+
+            //findNavController().navigate(R.id.action_homeFragment2_to_likeFragment)
+        }
+
+        binding!!.likedImageView.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment2_to_likeFragment)
         }
 
+
     }
+
+
+
     private fun placePopularMovie(randomMovie : Result){
 
         var genres =""
@@ -206,6 +249,8 @@ class HomeFragment : Fragment(), SendDataListener, FirebaseCallback{
     override fun onResponse(size: Int) {
         binding!!.favoriteImageView.isVisible = size <= 0
     }
+
+
 
 
 }

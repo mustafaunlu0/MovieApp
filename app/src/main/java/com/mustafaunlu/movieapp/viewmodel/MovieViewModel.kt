@@ -1,6 +1,9 @@
 package com.mustafaunlu.movieapp.viewmodel
 
 import android.content.Context
+import android.os.Build
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,11 +22,11 @@ class MovieViewModel @Inject constructor(
     private var db : FirebaseFirestore
 ) : ViewModel(){
 
-    var postSize=0
     private var username : MutableLiveData<String> = MutableLiveData()
     var profileImage : MutableLiveData<String> = MutableLiveData()
     var commentList : MutableLiveData<ArrayList<Comment>> = MutableLiveData()
     var selectedPostList : MutableLiveData<ArrayList<Post>> = MutableLiveData()
+    var postList : MutableLiveData<ArrayList<Post>> = MutableLiveData()
     var likedMovieList : MutableLiveData<ArrayList<LikedMovie>> = MutableLiveData()
 
     fun getUsername(): MutableLiveData<String> {
@@ -44,10 +47,24 @@ class MovieViewModel @Inject constructor(
         homeRepository.likeMovie(title,overview,date,imageUrl,context)
     }
 
-    fun postMovie(username: String,movName : String, category : String,postText : String,context: Context){
-        homeRepository.postMovie(username, movName,category,postText, context)
+    fun setPostList(postedList : ArrayList<Post>){
+        postList.postValue(postedList)
     }
 
+    fun filterList(text: String?, postedList : ArrayList<Post>) : ArrayList<Post>{
+        var itemList : ArrayList<Post> = arrayListOf()
+        for(item in postedList){
+            if(item.post.toString().toLowerCase().contains(text?.toLowerCase().toString())){
+                itemList.add(item)
+            }
+        }
+        return itemList
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun postMovie(username: String, movName : String, category : String, postText : String, context: Context){
+        homeRepository.postMovie(username, movName,category,postText, context)
+    }
 
 
     fun getCurrentUserEmail() : String{
@@ -68,12 +85,8 @@ class MovieViewModel @Inject constructor(
     fun getSelectedPost(username: String){
         homeRepository.getSelectedPost(username,selectedPostList)
     }
-
-
-
     fun findUserName(userMail: String){
-        println("MovieViewModel->findUserName()")
-        println("model-> $userMail")
+
         homeRepository.findUserName(userMail,username)
     }
     fun getUserPhotoWithUsername(username: String){

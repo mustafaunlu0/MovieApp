@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +21,8 @@ import com.mustafaunlu.movieapp.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FeedFragment : Fragment(), GetPostList {
+class FeedFragment : Fragment(), GetPostList,
+    androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
     private var binding : FragmentFeedBinding? = null
     private val viewModel : MovieViewModel by viewModels()
@@ -42,6 +45,11 @@ class FeedFragment : Fragment(), GetPostList {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        binding?.searchBar?.clearFocus()
+        binding?.searchBar?.setOnQueryTextListener(this)
+
+
         binding?.addStoryFab?.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_postFragment2)
         }
@@ -56,11 +64,14 @@ class FeedFragment : Fragment(), GetPostList {
 
     }
 
+
     override fun getPostList(postList: ArrayList<Post>) {
 
 
+        println("kaç kere gelicen")
 
         adapter.setList(postList)
+        viewModel.setPostList(postList)
 
 
         binding!!.feedRecyclerView.adapter=adapter
@@ -74,5 +85,34 @@ class FeedFragment : Fragment(), GetPostList {
 
     }
 
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        println("Text: "+newText)
+        viewModel.postList.observe(viewLifecycleOwner){
+            if(it!= null){
+                var postedList : ArrayList<Post> =viewModel.filterList(newText,it)
+                println("boyut: "+postedList.size)
+                if(postedList.isEmpty()){
+
+                }else{
+                    println("else")
+                    adapter.setList(postedList)
+                    adapter.notifyDataSetChanged()
+
+
+                }
+
+
+
+            }
+        }
+        return true
+    }
+
+
 
 }
+

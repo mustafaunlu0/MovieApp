@@ -1,12 +1,15 @@
 package com.mustafaunlu.movieapp.ui.fragments.feed
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -29,8 +32,6 @@ class PostFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var binding : FragmentPostBinding? = null
     var movieCategory= ArrayList<String>()
     private var category :String= ""
-    private var isCategoryClicked : Boolean =false
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +47,7 @@ class PostFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return binding!!.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,24 +55,26 @@ class PostFragment : Fragment(), AdapterView.OnItemSelectedListener {
         movieCategory.add("Select Category")
 
         for( item in genreViewModel.readAllGenres()){
+            //genre-data control
+            if(movieCategory.size > 16){
+                break
+            }
             movieCategory.add(item.genre_name_en)
+
         }
-        //Problem
-        //Kullanıcı adını alma problemi yaşıyoruz çekerken zorlanıyor
-        println("email ne:"+movieViewModel.getCurrentUserEmail())
+
         movieViewModel.findUserName(movieViewModel.getCurrentUserEmail())
 
 
         binding?.postButton?.setOnClickListener {
+            binding!!.postButton.startAnimation(clickAnimation())
+
             if(category !="Select Category"){
 
-                println("okey")
                 movieViewModel.getUsername().observe(viewLifecycleOwner, Observer {
-                    println("burada : $it")
                     movieViewModel.postMovie(it,binding!!.movNameEditText.text.toString(),category,binding!!.postEditText.text.toString(),requireContext())
                     findNavController().navigate(R.id.action_postFragment2_to_feedFragment)
                 })
-                println("okey-1")
 
 
 
@@ -87,7 +91,7 @@ class PostFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         var spinner= binding!!.spinner
         spinner.onItemSelectedListener = this
-
+        println("kategory size: "+movieCategory.size)
         val arrayAdapter=ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item,movieCategory)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter=arrayAdapter
@@ -124,5 +128,8 @@ class PostFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
+    fun  clickAnimation() : AlphaAnimation {
+        return AlphaAnimation(12F,0.01F)
+    }
 
 }

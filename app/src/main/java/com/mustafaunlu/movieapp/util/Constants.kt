@@ -9,7 +9,7 @@ object Constants {
     //PREF
     const val PREF_NAME ="moviePref"
     const val FIRST_RUN_KEY="isFirstRun"
-    const val LIKED_MOVIE="isLikedMovie"
+
     const val POSITION="position"
 
 

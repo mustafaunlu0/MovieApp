@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.feed.FeedFragment">
+    tools:context=".ui.fragments.feed.FeedFragment"
+    android:background="@color/appColor"
+    >
 
 <androidx.appcompat.widget.SearchView
     android:id="@+id/searchBar"
@@ -29,16 +31,18 @@
         />
 <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:id="@+id/addStoryFab"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
     android:src="@drawable/ic_add"
-    app:tint="@color/white"
-    android:backgroundTint="#039BE5"
-    app:layout_anchorGravity="bottom|end|right"
-    app:maxImageSize="28dp"
+    app:tint="@color/appColor"
+    android:backgroundTint="@color/white"
+    app:layout_anchorGravity="end|right"
+    app:maxImageSize="25dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    android:layout_margin="25dp"/>
+    android:layout_margin="25dp"
+    app:fabCustomSize="40dp"
+    />
 
     
 

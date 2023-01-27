@@ -59,8 +59,8 @@ class CommentFragment : Fragment() {
         binding!!.commentMovieNameTextView.text=post.movie
         binding!!.commentCategoryTextView.text=post.category
         binding!!.commentPostedTextView.text=post.post
-
-
+        binding!!.numberOfLike.text=post.numberOfLike.toString()
+        binding!!.numberOfDisLike.text=post.numberOfDislike.toString()
         listComment(post)
 
         binding!!.commentSendButton.setOnClickListener{

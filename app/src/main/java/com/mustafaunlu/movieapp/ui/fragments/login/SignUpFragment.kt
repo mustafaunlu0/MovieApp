@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -63,6 +64,7 @@ class SignUpFragment  : Fragment() {
            selectImage()
        }
         binding!!.signUpButton.setOnClickListener {
+            binding!!.signUpButton.startAnimation(clickAnimation())
 
             val email=binding!!.emailEditText.text.toString()
             val username=binding!!.usernameEditText.text.toString()
@@ -71,9 +73,15 @@ class SignUpFragment  : Fragment() {
 
             if(username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && passwordAgain.isNotEmpty()
                 && selectedPicture != null){
-                viewModel.signUp(email,username,password,passwordAgain, selectedPicture!!,requireContext())
+                if(password.length >=6){
+                    viewModel.signUp(email,username,password,passwordAgain, selectedPicture!!,requireContext())
+                    findNavController().navigate(R.id.action_signUpFragment_to_introFragment)
+                }else{
+                    FancyToast.makeText(requireContext(),"Password size must be at least 6!",
+                        FancyToast.LENGTH_LONG,
+                        FancyToast.ERROR,false).show();
+                }
 
-                    findNavController().navigate(R.id.action_signUpFragment_to_mainActivity)
 
 
             }else{
@@ -131,6 +139,10 @@ class SignUpFragment  : Fragment() {
                 FancyToast.makeText(requireContext(),"Permission need2",FancyToast.LENGTH_LONG,FancyToast.INFO,false).show();
             }
         }
+    }
+
+    fun  clickAnimation() : AlphaAnimation {
+        return AlphaAnimation(12F,0.01F)
     }
 
 

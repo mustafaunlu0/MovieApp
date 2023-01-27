@@ -45,8 +45,8 @@
         android:inputType="text"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/colorTextSecondary"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/profileLayout"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -65,8 +65,8 @@
         android:inputType="text"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/colorTextSecondary"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/usernameEditText"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -85,8 +85,8 @@
         android:inputType="textPassword"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/colorTextSecondary"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/emailEditText"/>
     <EditText
@@ -104,8 +104,8 @@
         android:inputType="textPassword"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/colorTextSecondary"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/passwordOneEditText"/>
 

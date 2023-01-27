@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
@@ -81,15 +82,12 @@ class IntroFragment : Fragment() {
         }
 
 
-        if(sessionManager.getIsFirstRun()){
+
             viewmodel.loadGenreData()
-            Toast.makeText(context, "ilk giriş",Toast.LENGTH_SHORT).show()
             createPromotions()
             placePromotion()
-        }else{
-            findNavController().navigate(R.id.action_introFragment2_to_movieFragment)
-        }
-        sessionManager.setIsFirstRun(false)
+
+
 
 
 
@@ -102,6 +100,8 @@ class IntroFragment : Fragment() {
     private fun placePromotion() {
         promotionInternet.placeData()
         binding!!.promotionNextButton.setOnClickListener {
+            binding!!.promotionNextButton.startAnimation(clickAnimation())
+
             proNumber++
             binding!!.promotionPrevButton.visibility=View.VISIBLE
             when(proNumber){
@@ -121,8 +121,7 @@ class IntroFragment : Fragment() {
                 }
                 else->{
                     //to Intent
-                    Toast.makeText(context, "LOADING..",Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_introFragment2_to_movieFragment)
+                    findNavController().navigate(R.id.action_introFragment_to_mainActivity)
                     proNumber--
                 }
 
@@ -130,6 +129,8 @@ class IntroFragment : Fragment() {
         }
 
         binding!!.promotionPrevButton.setOnClickListener {
+            binding!!.promotionPrevButton.startAnimation(clickAnimation())
+
             proNumber--
             when(proNumber){
                 0 ->{
@@ -152,6 +153,11 @@ class IntroFragment : Fragment() {
         promotionMovies=Promotion("Millions of Movies","Reach millions of movies instantly",R.drawable.movies,binding!!);
         promotionNotification = Promotion("Advance Notification","Let me inform you before the date of the vision of the films in your favorite list",R.drawable.notification,binding!!)
     }
+
+    fun  clickAnimation() : AlphaAnimation {
+        return AlphaAnimation(12F,0.01F)
+    }
+
 
 
 }

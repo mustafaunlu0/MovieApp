@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mustafaunlu.movieapp.R
@@ -54,6 +55,8 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.signInButton?.setOnClickListener {
+            binding!!.signInButton.startAnimation(clickAnimation())
+
             val email=binding!!.loginEmailEditText.text.toString()
             val password=binding!!.loginPasswordEditText.text.toString()
             if (email.isNotEmpty() && password.isNotEmpty()) {
@@ -68,11 +71,13 @@ class LoginFragment : Fragment() {
         binding?.newTextView?.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
-        binding!!.forgotPasswordTextView.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_postFragment)
-        }
 
 
+
+    }
+
+    fun  clickAnimation() : AlphaAnimation{
+        return AlphaAnimation(12F,0.01F)
     }
 
 

@@ -76,8 +76,8 @@
         android:inputType="textPassword"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/colorTextSecondary"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/forgotPasswordTextView"/>
     <EditText
@@ -94,8 +94,8 @@
         android:inputType="text"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/colorTextSecondary"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/loginPasswordEditText"/>
     <TextView
@@ -106,10 +106,23 @@
         android:layout_marginEnd="40dp"
         android:text="Welcome"
         android:textSize="50sp"
-        android:textColor="@color/white"
+        android:textColor="@color/title"
         android:textStyle="bold"
         android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toTopOf="@id/loginEmailEditText"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/entityIcon"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        app:lottie_url="https://assets4.lottiefiles.com/packages/lf20_puwecidm.json"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:layout_marginBottom="-198dp"
+        app:layout_constraintBottom_toTopOf="@id/welcomeTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 
 

@@ -47,9 +47,10 @@ class LikeFragment : Fragment(), SendLikedMovie {
         likeAdapter= LikeAdapter()
         viewModel.getUserLikedMovie()
 
-        println("girdi mi")
+
         viewModel.likedMovieList.observe(viewLifecycleOwner){
             likeAdapter.setList(it,this)
+            likeAdapter.notifyDataSetChanged()
             binding!!.likedRecyclerView.adapter=likeAdapter
             binding!!.likedRecyclerView.layoutManager=LinearLayoutManager(context)
         }

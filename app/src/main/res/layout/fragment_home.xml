@@ -7,6 +7,7 @@
     tools:context=".ui.fragments.home.HomeFragment"
     android:layout_marginTop="20dp"
     android:layout_marginBottom="20dp"
+    android:background="@color/appColor"
     >
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -16,10 +17,11 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/ic_category"
-        android:tint="@color/appColor"
+        android:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
+
     <TextView
         android:id="@+id/textCategory"
         android:layout_width="wrap_content"
@@ -28,7 +30,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginStart="10dp"
-        android:textColor="@color/black"
+        android:textColor="@color/title"
         app:layout_constraintBottom_toBottomOf="@id/imageCategory"
         app:layout_constraintStart_toEndOf="@id/imageCategory"
         app:layout_constraintTop_toTopOf="@id/imageCategory"
@@ -39,29 +41,32 @@
         android:layout_height="28dp"
         android:layout_marginStart="10dp"
         android:src="@drawable/ic_arrow_down"
-        android:tint="@color/appColor"
+        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/textCategory"
         app:layout_constraintStart_toEndOf="@id/textCategory"
         app:layout_constraintTop_toTopOf="@id/textCategory"
         />
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/likeImageView"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:src="@drawable/ic_favorite"
-        android:tint="@color/colorAccent"
-        android:contentDescription="Liked Movie"
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/likedImageView"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        app:lottie_url="https://assets10.lottiefiles.com/datafiles/hvAaKBDVLhuV5Wl/data.json"
+        app:lottie_autoPlay="true"
+        app:lottie_repeatCount="1"
+        app:lottie_loop="false"
         app:layout_constraintEnd_toStartOf="@id/notificationImageView"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="20dp"
-        />
+        tools:ignore="MissingConstraints" />
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/notificationImageView"
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:src="@drawable/ic_notifications"
-        android:tint="@color/appColor"
+        android:tint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="20dp"
@@ -145,14 +150,17 @@
             </LinearLayout>
 
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/favoriteImageView"
-                android:layout_width="32dp"
-                android:layout_height="26dp"
-                android:background="#FFFF7173"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
                 android:padding="2dp"
-                android:src="@drawable/ic_favorite"
-                android:tint="@color/white"
+                app:lottie_url="https://assets10.lottiefiles.com/packages/lf20_4VYPxJ.json"
+                app:lottie_autoPlay="true"
+                app:lottie_repeatCount="99"
+                android:layout_marginBottom="-10dp"
+                app:lottie_loop="false"
+                android:layout_marginEnd="-10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 />
@@ -168,7 +176,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="26dp"
         android:text="Recommended"
-        android:textColor="@color/black"
+        android:textColor="@color/title"
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/recommendedCardView"
@@ -180,7 +188,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:text="View All"
-        android:textColor="#6A6464"
+        android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/recommendedTextView"
         app:layout_constraintEnd_toEndOf="parent"

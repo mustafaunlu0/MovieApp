@@ -86,11 +86,14 @@ class HomeRepository @Inject constructor(
         var likedArrayList= arrayListOf<LikedMovie>()
         firestore.collection("Liked-Movie-User").get().addOnSuccessListener{
             for(item in it){
+                if(item.data["usermail"].toString() == currentUser())
                 likedArrayList.add(LikedMovie(item.data["title"].toString(),item.data["overview"].toString(),item.data["date"].toString(),item.data["imageUri"].toString()))
             }
             likedList.postValue(likedArrayList)
 
         }
+
+
 
     }
 
@@ -109,6 +112,7 @@ class HomeRepository @Inject constructor(
         postMap["postText"]=postText
         postMap["username"]=username
         postMap["numberOfLike"]=0
+        postMap["numberOfDislike"]=0
         //postMap["date"]=com.google.firebase.Timestamp.now()
         //Date
         val current = LocalDateTime.now()
@@ -136,27 +140,20 @@ class HomeRepository @Inject constructor(
 
         firestore.collection("Posts").orderBy("date", Query.Direction.DESCENDING).get().addOnSuccessListener {
             for (item in it){
-                postList.add(Post(item.data["id"].toString(),item.data["username"].toString(),item.data["movName"].toString(),item.data["category"].toString(),item.data["postText"].toString(),item.data["numberOfLike"].toString().toInt(),item.data["date"].toString()))
+                postList.add(Post(item.data["id"].toString(),item.data["username"].toString(),item.data["movName"].toString(),item.data["category"].toString(),item.data["postText"].toString(),item.data["numberOfLike"].toString().toInt(),item.data["numberOfDislike"].toString().toInt(),item.data["date"].toString()))
                 callback.getPostList(postList)
             }
         }
         return postList
     }
-    fun likePost(){
-        firestore.collection("Posts").get().addOnSuccessListener {
 
-            for(item in it) {
-
-            }
-        }
-    }
 
     fun getSelectedPost(username: String, selectedPost : MutableLiveData<ArrayList<Post>>){
         var selectedPostArrayList : ArrayList<Post> = arrayListOf()
         firestore.collection("Posts").orderBy("date", Query.Direction.DESCENDING).get().addOnSuccessListener {
             for (item in it){
                 if(item.data["username"].toString()==username){
-                    selectedPostArrayList.add(Post(item.data["id"].toString(),item.data["username"].toString(),item.data["movName"].toString(),item.data["category"].toString(),item.data["postText"].toString(),item.data["numberOfLike"].toString().toInt(),item.data["date"].toString()))
+                    selectedPostArrayList.add(Post(item.data["id"].toString(),item.data["username"].toString(),item.data["movName"].toString(),item.data["category"].toString(),item.data["postText"].toString(),item.data["numberOfLike"].toString().toInt(),item.data["numberOfDislike"].toString().toInt(),item.data["date"].toString()))
                 }
             }
             selectedPost.postValue(selectedPostArrayList)

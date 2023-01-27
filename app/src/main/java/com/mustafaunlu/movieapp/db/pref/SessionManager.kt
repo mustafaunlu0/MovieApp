@@ -12,7 +12,6 @@ class SessionManager @Inject constructor(
 
 
 
-    fun getPosition() = preferences.getInt(Constants.POSITION,9999)
 
 
 
@@ -21,6 +20,7 @@ class SessionManager @Inject constructor(
         editor.putBoolean(Constants.FIRST_RUN_KEY,value)
         editor.apply()
     }
+
     fun setPosition(value : Int){
         val editor=preferences.edit()
         editor.putInt(Constants.POSITION,value).apply()

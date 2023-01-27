@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.mustafaunlu.movieapp.R
+import com.mustafaunlu.movieapp.db.pref.SessionManager
 import com.mustafaunlu.movieapp.models.api.Movie
 import com.mustafaunlu.movieapp.models.post.Post
 import com.mustafaunlu.movieapp.repo.app.HomeRepository
@@ -39,14 +40,16 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     fun setList(postList: List<Post>){
         this.postList=postList
-
     }
+
 
 
 
 
     class PostViewHolder(view : View) : RecyclerView.ViewHolder(view){
 
+        @Inject
+        lateinit var sessionManager: SessionManager
 
         private var firestore: FirebaseFirestore= Firebase.firestore
         private val profileImage=view.findViewById<ImageView>(R.id.profileImageView)
@@ -54,11 +57,18 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
         private val movie=view.findViewById<TextView>(R.id.movieNameTextView)
         private val category=view.findViewById<TextView>(R.id.categoryTextView)
         private val post=view.findViewById<TextView>(R.id.postedTextView)
+        public val comment =view.findViewById<TextView>(R.id.commentTextView)
         var numberOfLike=view.findViewById<TextView>(R.id.numberOfLike)
+        var numberOfDisLike=view.findViewById<TextView>(R.id.numberOfDisLike)
+
         var numberOfLikeButton=view.findViewById<ImageView>(R.id.numberOfLikeButton)
+        var numberOfDislikeButton=view.findViewById<ImageView>(R.id.numberOfDislikeButton)
+
         private var date=view.findViewById<TextView>(R.id.postDateTextView)
 
-        private var like : Boolean=true
+        private var like : Boolean = true
+        private var dislike : Boolean=true
+
 
 
         fun bind(data : Post){
@@ -69,6 +79,8 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
         post.text=data.post
         date.text=data.date
         numberOfLike.text=data.numberOfLike.toString()
+        numberOfDisLike.text=data.numberOfDislike.toString()
+
             firestore.collection("User").get().addOnSuccessListener {
                 for (item in it){
                     if(item.data["username"].toString()==data.username){
@@ -93,6 +105,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
                                     FancyToast.makeText(itemView.context, "Liked!",
                                         FancyToast.LENGTH_LONG,
                                         FancyToast.SUCCESS,false).show();
+
                                     like=false
 
                                 }
@@ -104,6 +117,33 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
             }
 
         }
+
+        fun decDislike(postData: Post){
+            if (dislike){
+                firestore.collection("Posts").get().addOnSuccessListener {
+                    for(item in it){
+                        if(item.data["id"].toString()==postData.id){
+                            println("item-id: "+item.id)
+
+                            //Birden fazla like atıyor
+                            firestore.collection("Posts").document(item.id).update("numberOfDislike",postData.numberOfDislike--).addOnSuccessListener {
+                                var likeMap=HashMap<String,Any>()
+                                likeMap["user"]=postData.username
+                                firestore.collection("Post-Details").document(postData.id).collection("Usernames").add(likeMap).addOnSuccessListener {
+                                    FancyToast.makeText(itemView.context, "Dislike!",
+                                        FancyToast.LENGTH_LONG,
+                                        FancyToast.SUCCESS,false).show()
+                                    dislike=false
+
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -133,12 +173,35 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
              */
 
         }
+
+        holder.comment.setOnClickListener {
+            val bundle = bundleOf("post" to postList!![position])
+
+            if(holder.itemView.findNavController().currentDestination?.id==R.id.feedFragment){
+                //Feed Fragment
+                println("feed")
+                holder.itemView.findNavController().navigate(R.id.action_feedFragment_to_commentFragment,bundle)
+            }
+
+            else{
+                println("profile")
+                holder.itemView.findNavController().navigate(R.id.action_profileFragment_to_commentFragment2,bundle)
+
+            }
+        }
         holder.numberOfLikeButton.setOnClickListener {
             println("tıklandı")
             holder.incLike(postList!![position])
             notifyDataSetChanged()
 
         }
+        holder.numberOfDislikeButton.setOnClickListener {
+            println("tıklandı")
+            holder.decDislike(postList!![position])
+            notifyDataSetChanged()
+
+        }
+
 
 
     }
